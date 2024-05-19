@@ -11,7 +11,7 @@ function App() {
       <div className="logo-container">
         <img className="logo" src={logo} alt="logo" />
       </div>
-      <h1>Giganet Comming Soon...</h1>
+      <h1>GigaNet Comming Soon...</h1>
     </div>
 
 
