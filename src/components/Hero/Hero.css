@@ -1,0 +1,49 @@
+.hero {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	
+	.contenido_hero {
+		margin-top: var(--header-height);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		h1 {
+			font-size: 2rem;
+		}
+		p {
+			font-size: 1.2rem;
+			color: #6d6c6c;
+		}
+	}
+	.button_hero {
+		width: 100%;
+		margin: 0 auto;
+		margin-top: 20px;
+		@media (min-width: 512px) {
+			width: 40%;
+		}
+		button {
+			width: 100%;
+			text-transform: uppercase;
+			font-size: 1.2rem;
+		}
+		@media (min-width: 512px) {
+			width: 40%;
+		}
+	}
+	.imagen_hero {
+		margin-top: 40px;
+		width: 100%;
+		img {
+			width: 100%;
+		}
+	}
+}
+
+main {
+}

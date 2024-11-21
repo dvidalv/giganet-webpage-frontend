@@ -1,0 +1,46 @@
+.menu_mobile_container {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	.menu_mobile_line {
+		width: 30px;
+		height: 4px;
+		background-color: var(--color-primary);
+		transition: all 0.3s ease;
+
+		@media (min-width: 768px) {
+			display: none;
+		}
+
+	}
+	
+
+	&.open {
+		.menu_mobile_line_1 {
+			transform: rotate(45deg) translate(4px, 6px);
+			-webkit-transform: rotate(45deg) translate(4px, 6px);
+			-moz-transform: rotate(45deg) translate(4px, 6px);
+			-ms-transform: rotate(45deg) translate(4px, 6px);
+			-o-transform: rotate(45deg) translate(4px, 6px);
+}
+
+		.menu_mobile_line_2 {
+			opacity: 0;
+		}
+
+		.menu_mobile_line_3 {
+			transform: rotate(-45deg) translate(5px, -7px);
+			-webkit-transform: rotate(-45deg) translate(5px, -7px);
+			-moz-transform: rotate(-45deg) translate(5px, -7px);
+			-ms-transform: rotate(-45deg) translate(5px, -7px);
+			-o-transform: rotate(-45deg) translate(5px, -7px);
+}
+	}
+
+
+
+}
