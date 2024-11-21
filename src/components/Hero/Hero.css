@@ -1,8 +1,5 @@
 .hero {
-	/* margin-top: var(--header-height); */
-	padding: 20px;
 	padding-top: var(--header-height);
-
 	
 	@media (min-width: 768px) {
 		display: grid;
@@ -49,5 +46,3 @@
 	}
 }
 
-main {
-}
