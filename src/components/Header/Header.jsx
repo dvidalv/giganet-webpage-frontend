@@ -4,17 +4,34 @@ import MobileMenu from '../Mobile_menu/MobileMenu';
 import { menuLinks } from '../../utils/constants';
 import MenuLink from '../DropDown/MenuLink';
 import DropDown from '../DropDown/DropDown';
+import { useNavigate } from 'react-router-dom';
 function Header() {
-	
+	const navigate = useNavigate();
+
 	const handleScroll = (e, sectionId) => {
 		e.preventDefault();
-		const cleanId = sectionId.replace('/', '');
-		const element = document.getElementById(cleanId);
 		
+		if (sectionId === 'contact') {
+			navigate('/contact');
+			return;
+		}
+
+		if (location.pathname !== '/') {
+			navigate('/');
+			setTimeout(() => {
+				const element = document.getElementById(sectionId);
+				if (element) {
+					element.scrollIntoView({ behavior: 'smooth' });
+				}
+			}, 100);
+			return;
+		}
+
+		const element = document.getElementById(sectionId);
 		if (element) {
 			element.scrollIntoView({ behavior: 'smooth' });
 		} else {
-			console.warn(`Section with id "${cleanId}" not found`);
+			console.warn(`Section with id "${sectionId}" not found`);
 		}
 	};
 	const isActive = (path) => {
