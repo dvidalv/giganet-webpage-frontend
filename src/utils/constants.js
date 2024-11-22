@@ -10,7 +10,6 @@ export const menuLinks = [
 	{ to: 'hero', text: 'Inicio', submenu: false },
 	{ to: 'servicios', text: 'Servicios', submenu: false },
 	{ to: 'nosotros', text: 'Sobre Nosotros', submenu: false },
-	{ to: 'aplicaciones', text: 'Aplicaciones', submenu: false },
 	{ to: 'clientes', text: 'Clientes', submenu: false },
 	{ to: 'contact', text: 'Contacto', submenu: false },
 ];

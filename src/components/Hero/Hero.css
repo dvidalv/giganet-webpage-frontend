@@ -33,6 +33,13 @@
 			width: 100%;
 			text-transform: uppercase;
 			font-size: 1.2rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+
+			&:hover {
+				background-color: var(--background-color);
+				color: var(--color-primary);
+			}
 		}
 		@media (min-width: 768px) {
 			width: 60%;

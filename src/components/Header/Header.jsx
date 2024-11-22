@@ -42,7 +42,7 @@ function Header() {
 	return (
 		<div className="header">
 			<div className="contenido_header contenedor">
-				<div className="imgen_header">
+				<div className="imgen_header" onClick={(e) => handleScroll(e, 'hero')}>
 					<img src={logo} alt="logo" className="w-[170px] mb-4" />
 				</div>
 

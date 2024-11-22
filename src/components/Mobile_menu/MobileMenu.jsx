@@ -3,7 +3,7 @@ import { useState } from 'react';
 function MobileMenu() {
 	const [isOpen, setIsOpen] = useState(false);
 
-	console.log(isOpen);
+	// console.log(isOpen);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);

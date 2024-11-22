@@ -12,7 +12,7 @@ function Hero() {
 					soluciones innovadoras y eficientes para tus necesidades específicas.
 				</p>
 				<div className="button_hero">
-					<button className="button">Contáctanos</button>
+					<button className="button" onClick={() => window.location.href='contact'}>Contáctanos</button>
 				</div>
 			</div>
 			<div className="imagen_hero">

@@ -23,7 +23,7 @@ function Nosotros() {
 							respondan a sus requerimientos específicos.
 						</p>
 						<div className="button_nosotros">
-							<button className="button">Contáctanos</button>
+							<button className="button" onClick={() => window.location.href='contact'}>Contáctanos</button>
 						</div>
 					</div>
 				</div>
