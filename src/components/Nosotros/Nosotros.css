@@ -2,7 +2,6 @@
 	/* padding-top: 40px; */
 	background-color: rgb(39, 39, 39);
 
-
 	.grid_contenido {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -29,8 +28,7 @@
 			p {
 				font-weight: 100;
 				line-height: 2;
-				padding: 6
-				40px 40px;
+				padding: 0 20px 40px;
 				font-size: 1.2rem;
 				/* position: relative;
 				top: 0;

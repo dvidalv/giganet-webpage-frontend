@@ -30,6 +30,7 @@ function Footer() {
 						<div className="footer_grid_item_content">
 							<p>Telefono</p>
 							<a href="tel:829-661-2747">829-661-2747</a>
+							<a href="tel:682-560-2093">682-560-2093</a>
 						</div>
 					</div>
 

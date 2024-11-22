@@ -1,29 +1,19 @@
 import './App.css';
 import Header from './components/Header/Header';
-import Hero from './components/Hero/Hero';
-import Servicios from './components/Servicios/Servicios';
-import Nosotros from './components/Nosotros/Nosotros';
-import Clientes from './components/Clientes/Clientes';
+import { Outlet } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
+import SideMenu from './components/SideMenu/SideMenu';
+import { useState } from 'react';
 
-// const getComprobantes = async () => {
-// 	const response = await fetch('https://giganet-backend.vercel.app/api/v1/comprobantes');
-// 	const data = await response.json();
-// 	console.log(data);
-// 	return data;
-// };
-
-// getComprobantes();
 
 function App() {
+	const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 	return (
 		<>
-			<Header />
-			<Hero />
-			<Servicios />
-			<Nosotros />
-			<Clientes />
+			<Header isSideMenuOpen={isSideMenuOpen} setIsSideMenuOpen={setIsSideMenuOpen} />
+			<Outlet />
 			<Footer />
+			<SideMenu isOpen={isSideMenuOpen} onClose={() => setIsSideMenuOpen(false)} />
 		</>
 	);
 }

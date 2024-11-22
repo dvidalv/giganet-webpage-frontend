@@ -1,3 +1,4 @@
+
 import './Header.css';
 import logo from '../../assets/images/giganet_logo.png';
 import MobileMenu from '../Mobile_menu/MobileMenu';
@@ -5,9 +6,13 @@ import { menuLinks } from '../../utils/constants';
 import MenuLink from '../DropDown/MenuLink';
 import DropDown from '../DropDown/DropDown';
 import { useNavigate } from 'react-router-dom';
-function Header() {
-	const navigate = useNavigate();
+import PropTypes from 'prop-types';
 
+function Header({ setIsSideMenuOpen, isSideMenuOpen }) {
+	const navigate = useNavigate();
+	
+
+	
 	const handleScroll = (e, sectionId) => {
 		e.preventDefault();
 		
@@ -68,10 +73,15 @@ function Header() {
 					</ul>
 				</div>
 
-				<MobileMenu />
+				<MobileMenu isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen} />
 			</div>
 		</div>
 	);
 }
+
+Header.propTypes = {
+	setIsSideMenuOpen: PropTypes.func.isRequired,
+	isSideMenuOpen: PropTypes.bool.isRequired,
+};
 
 export default Header;

@@ -1,7 +1,7 @@
 import './Nosotros.css';
 function Nosotros() {
 	return (
-		<div className="contenedor" id="nosotros">
+		<section className="contenedor" id="nosotros">
 			<div className="nosotros">
 				<h2>Sobre Nosotros</h2>
 				<div className="grid_contenido">
@@ -28,7 +28,7 @@ function Nosotros() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 }
 

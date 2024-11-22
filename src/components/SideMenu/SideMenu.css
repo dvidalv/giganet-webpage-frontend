@@ -1,0 +1,15 @@
+.side-menu {
+	position: fixed;
+	top: var(--header-height);
+	right: 0;
+	width: 30%;
+	height: calc(100vh - var(--header-height));
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: all 0.8s ease-in-out;
+	transform: translateX(100%);
+	z-index: 1000;
+	
+	&.open {
+		transform: translateX(0);
+	}
+}

@@ -12,11 +12,13 @@ const schema = z.object({
 	mensaje: z.string().min(1, { message: 'El mensaje es requerido' }),
 });
 
+import 'animate.css';
+
 function Contacto() {
 	const {
 		register,
 		handleSubmit,
-		setError,
+		setError, // eslint-disable-line
 		reset,
 		formState: { errors, isSubmitting },
 	} = useForm({
@@ -25,14 +27,23 @@ function Contacto() {
 
 	const onSubmit = (data) => {
 		console.log(data);
+		reset();
 	};
+
+	const errorMessageStyle = {
+		color: '#ff0000',
+		fontSize: '0.8rem',
+		marginTop: '4px',
+		fontWeight: '500'
+	};
+
 
 	return (
 		<>
 			<Header />
 			<div className="form_container">
 				<div className="contact" id="contact">
-					<h2>Contacto</h2>
+					<h1>Contacto</h1>
 				<Form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
 					<div className="form-group">
 						<label htmlFor="nombre">Nombre</label>
@@ -44,6 +55,7 @@ function Contacto() {
 							required
 							{...register('nombre')}
 						/>
+						{errors.nombre && <p className="error" style={errorMessageStyle}>{errors.nombre.message}</p>}
 					</div>
 
 					<div className="form-group">
@@ -56,6 +68,7 @@ function Contacto() {
 							required
 							{...register('telefono')}
 						/>
+						{errors.telefono && <p className="error" style={errorMessageStyle}>{errors.telefono.message}</p>}
 					</div>
 
 					<div className="form-group">
@@ -68,6 +81,7 @@ function Contacto() {
 							required
 							{...register('email')}
 						/>
+						{errors.email && <p className="error" style={errorMessageStyle}>{errors.email.message}</p>}
 					</div>
 
 					<div className="form-group">
@@ -79,12 +93,17 @@ function Contacto() {
 							rows="4"
 							required
 							{...register('mensaje')}
-						></textarea>
-					</div>
+							></textarea>
+							{errors.mensaje && <p className="error" style={errorMessageStyle}>{errors.mensaje.message}</p>}
+						</div>
 
-					<button type="submit" className="button">
-						Enviar Mensaje
-					</button>
+						<button 
+							type="submit" 
+							className={`button ${Object.keys(errors).length > 0 ? 'animate__headShake' : ''}`} 
+							disabled={isSubmitting}
+						>
+							{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+						</button>
 					</Form>
 				</div>
 			</div>
