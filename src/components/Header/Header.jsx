@@ -7,10 +7,13 @@ import MenuLink from '../DropDown/MenuLink';
 import DropDown from '../DropDown/DropDown';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { MobileContext } from '../../store/mobileContext';
 
-function Header({ setIsSideMenuOpen, isSideMenuOpen }) {
+function Header() {
 	const navigate = useNavigate();
-	
+	const { menuState, toggleSideMenu } = useContext(MobileContext);
+
 
 	
 	const handleScroll = (e, sectionId) => {
@@ -73,7 +76,7 @@ function Header({ setIsSideMenuOpen, isSideMenuOpen }) {
 					</ul>
 				</div>
 
-				<MobileMenu isOpen={isSideMenuOpen} setIsOpen={setIsSideMenuOpen} />
+				<MobileMenu isOpen={menuState.isSideMenuOpen} setIsOpen={toggleSideMenu} />
 			</div>
 		</div>
 	);

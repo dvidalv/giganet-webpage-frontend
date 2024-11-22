@@ -6,6 +6,7 @@ import './index.css';
 
 import Main from './components/Main/Main.jsx';
 import Contacto from './components/Contacto/Contacto.jsx';
+import { MobileContextProvider } from './store/mobileContext.jsx';
 
  
 const router = createBrowserRouter([
@@ -17,6 +18,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<MobileContextProvider>
+			<RouterProvider router={router} />
+		</MobileContextProvider>
 	</React.StrictMode>
 );
