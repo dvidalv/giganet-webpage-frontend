@@ -12,6 +12,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: 10px;
+		background-color: #1a1a1a;
 
 		h1 {
 			font-size: 2rem;
@@ -42,6 +43,7 @@
 		width: 100%;
 		img {
 			width: 100%;
+			object-fit: cover;
 		}
 	}
 }

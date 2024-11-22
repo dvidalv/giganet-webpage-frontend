@@ -7,15 +7,12 @@ if (window.location.hostname === 'localhost') {
 }
 
 export const menuLinks = [
-	{ to: '/', text: 'Cloud', submenu: false },
-	{ to: '/filemaker', text: 'FileMaker', submenu: false },
-	{
-		to: '/aplicaciones-personalizadas',
-		text: 'Aplicaciones Personalizadas',
-		submenu: false,
-	},
-	{ to: '/consultoria', text: 'Consultoria', submenu: false },
-	{ to: '/contact', text: 'Contacto', submenu: false },
+	{ to: 'hero', text: 'Inicio', submenu: false },
+	{ to: 'servicios', text: 'Servicios', submenu: false },
+	{ to: 'nosotros', text: 'Sobre Nosotros', submenu: false },
+	{ to: 'aplicaciones', text: 'Aplicaciones', submenu: false },
+	{ to: 'clientes', text: 'Clientes', submenu: false },
+	{ to: 'contact', text: 'Contacto', submenu: false },
 ];
 
 // export const FILEMAKER_URL = 'https://www.server-lpcr.com.doo';

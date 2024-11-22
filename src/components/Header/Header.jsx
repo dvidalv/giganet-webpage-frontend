@@ -5,6 +5,18 @@ import { menuLinks } from '../../utils/constants';
 import MenuLink from '../DropDown/MenuLink';
 import DropDown from '../DropDown/DropDown';
 function Header() {
+	
+	const handleScroll = (e, sectionId) => {
+		e.preventDefault();
+		const cleanId = sectionId.replace('/', '');
+		const element = document.getElementById(cleanId);
+		
+		if (element) {
+			element.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			console.warn(`Section with id "${cleanId}" not found`);
+		}
+	};
 	const isActive = (path) => {
 		if (path === '/') return location.pathname === '/';
 		return location.pathname.startsWith(path); // true or false
@@ -20,7 +32,12 @@ function Header() {
 				<div className="nav_header">
 					<ul>
 						{menuLinks.map((link) => (
-							<MenuLink key={link.to} {...link} isActive={isActive(link.to)}>
+							<MenuLink
+								key={link.to}
+								{...link}
+								isActive={isActive(link.to)}
+								onClick={(e) => handleScroll(e, link.to)}
+							>
 								{link.submenu &&
 									link.submenuItems.map((subItem) => (
 										<DropDown

@@ -6,7 +6,7 @@ import biopap from '../../assets/images/biopap-logo.png';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
 function Clientes() {
 	return (
-		<section className="contenedor">
+		<section className="contenedor" id="clientes">
 			<div className="clientes">
 				<h2>Nuestros Clientes</h2>
 				<div className="clientes_grid">

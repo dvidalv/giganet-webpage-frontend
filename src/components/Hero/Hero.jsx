@@ -2,7 +2,7 @@ import imagen from '../../assets/images/hero.png';
 import './Hero.css';
 function Hero() {
 	return (
-		<main className="hero contenedor">
+		<main className="hero contenedor" id="hero">
 			<div className="contenido_hero">
 				<h1>Desarrollamos Programas Personalizados</h1>
 				<p>
