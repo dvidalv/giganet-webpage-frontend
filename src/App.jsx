@@ -7,14 +7,14 @@ import { MobileContext } from './store/mobileContext';
 import { useContext } from 'react';
 
 function App() {
-	const { menuState } = useContext(MobileContext);
+	const { menuState, toggleSideMenu } = useContext(MobileContext);
 
 	return (
 		<>
 			<Header />
 			<Outlet />
 			<Footer />
-			<SideMenu isOpen={menuState.isSideMenuOpen} />
+			<SideMenu isOpen={menuState.isSideMenuOpen} onClose={toggleSideMenu} />
 		</>
 	);
 }

@@ -2,11 +2,11 @@ import { menuLinks } from '../../utils/constants';
 import PropTypes from 'prop-types';
 import './SideMenu.css';
 import { useNavigate } from 'react-router-dom';
-function SideMenu({ isOpen }) {
+function SideMenu({ isOpen, onClose }) {
 	const navigate = useNavigate();
 	const handleScroll = (e, sectionId) => {
 		e.preventDefault();
-		
+
 		if (sectionId === 'contact') {
 			navigate('/contact');
 			return;
@@ -30,19 +30,25 @@ function SideMenu({ isOpen }) {
 			console.warn(`Section with id "${sectionId}" not found`);
 		}
 	};
-	const isActive = (path) => {
-		if (path === '/') return location.pathname === '/';
-		return location.pathname.startsWith(path); // true or false
-	};
 
-	console.log(menuLinks);
 	return (
 		<div className={`side-menu ${isOpen ? 'open' : ''}`}>
 			<div className="side-menu-content">
 				<nav>
-					<ul className='side-menu-list'>
+					<ul
+						className="side-menu-list"
+						onMouseLeave={() => {
+							if (isOpen) {
+								onClose(false);
+							}
+						}}
+					>
 						{menuLinks.map((link) => (
-							<li key={link.to} className='side-menu-item' onClick={(e) => handleScroll(e, link.to)}>
+							<li
+								key={link.to}
+								className="side-menu-item"
+								onClick={(e) => handleScroll(e, link.to)}
+							>
 								{link.text}
 							</li>
 						))}

@@ -6,7 +6,6 @@ import { menuLinks } from '../../utils/constants';
 import MenuLink from '../DropDown/MenuLink';
 import DropDown from '../DropDown/DropDown';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { MobileContext } from '../../store/mobileContext';
 
@@ -82,9 +81,6 @@ function Header() {
 	);
 }
 
-Header.propTypes = {
-	setIsSideMenuOpen: PropTypes.func.isRequired,
-	isSideMenuOpen: PropTypes.bool.isRequired,
-};
+
 
 export default Header;

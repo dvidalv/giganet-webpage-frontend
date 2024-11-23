@@ -11,10 +11,44 @@ const schema = z.object({
 	email: z.string().email({ message: 'El email es requerido' }),
 	mensaje: z.string().min(1, { message: 'El mensaje es requerido' }),
 });
+import { useEffect, useState } from 'react';
 
 import 'animate.css';
+import { sendContactFormData } from '../../api/api';
+
 
 function Contacto() {
+	const [locationStatus, setLocationStatus] = useState('');
+
+	console.log(locationStatus);
+
+	const getLocation = async () => {
+		try {
+			const position = await new Promise((resolve, reject) => {
+				navigator.geolocation.getCurrentPosition(resolve, reject);
+			});
+			const { latitude, longitude } = position.coords;
+			
+			// Obtener el nombre de la ciudad usando Nominatim
+			const response = await fetch(
+				`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+			);
+			const data = await response.json();
+			const city = data.address.city || data.address.town || data.address.village;
+			
+			setLocationStatus(`Ubicación: ${city}`);
+			console.log('Ciudad:', city);
+			
+		} catch (error) {
+			console.log(error.message);
+			setLocationStatus('Error al obtener la ubicación');
+		}
+	};
+
+	useEffect(() => {
+		getLocation();
+	}, []);
+
 	const {
 		register,
 		handleSubmit,
@@ -27,6 +61,7 @@ function Contacto() {
 
 	const onSubmit = (data) => {
 		console.log(data);
+		sendContactFormData(data);
 		reset();
 	};
 
@@ -34,9 +69,8 @@ function Contacto() {
 		color: '#ff0000',
 		fontSize: '0.8rem',
 		marginTop: '4px',
-		fontWeight: '500'
+		fontWeight: '500',
 	};
-
 
 	return (
 		<>
@@ -44,62 +78,107 @@ function Contacto() {
 			<div className="form_container">
 				<div className="contact" id="contact">
 					<h1>Contacto</h1>
-				<Form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
-					<div className="form-group">
-						<label htmlFor="nombre">Nombre</label>
-						<input
-							type="text"
-							id="nombre"
-							name="nombre"
-							placeholder="Ingrese su nombre"
-							required
-							{...register('nombre')}
-						/>
-						{errors.nombre && <p className="error" style={errorMessageStyle}>{errors.nombre.message}</p>}
-					</div>
-
-					<div className="form-group">
-						<label htmlFor="telefono">Teléfono</label>
-						<input
-							type="tel"
-							id="telefono"
-							name="telefono"
-							placeholder="Ingrese su teléfono"
-							required
-							{...register('telefono')}
-						/>
-						{errors.telefono && <p className="error" style={errorMessageStyle}>{errors.telefono.message}</p>}
-					</div>
-
-					<div className="form-group">
-						<label htmlFor="email">Email</label>
-						<input
-							type="email"
-							id="email"
-							name="email"
-							placeholder="Ingrese su email"
-							required
-							{...register('email')}
-						/>
-						{errors.email && <p className="error" style={errorMessageStyle}>{errors.email.message}</p>}
-					</div>
-
-					<div className="form-group">
-						<label htmlFor="mensaje">Mensaje</label>
-						<textarea
-							id="mensaje"
-							name="mensaje"
-							placeholder="Escriba su mensaje"
-							rows="4"
-							required
-							{...register('mensaje')}
-							></textarea>
-							{errors.mensaje && <p className="error" style={errorMessageStyle}>{errors.mensaje.message}</p>}
+					{/* <button
+						onClick={getLocation}
+						style={{
+							marginBottom: '10px',
+							display: 'block',
+							width: '40%',
+							backgroundColor: '#000',
+							color: '#fff',
+							padding: '10px',
+							borderRadius: '5px',
+							marginLeft: 'auto',
+							marginRight: 'auto',
+						}}
+					>
+						Compartir Ubicación
+					</button>
+					{locationStatus && (
+						<p
+							style={{
+								color: locationStatus.includes('Error') ? 'red' : 'green',
+								marginBottom: '10px',
+								textAlign: 'center',
+							}}
+						>
+							{locationStatus}
+						</p>
+					)} */}
+					<Form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
+						<div className="form-group">
+							<label htmlFor="nombre">Nombre</label>
+							<input
+								type="text"
+								id="nombre"
+								name="nombre"
+								placeholder="Ingrese su nombre"
+								required
+								{...register('nombre')}
+							/>
+							{errors.nombre && (
+								<p className="error" style={errorMessageStyle}>
+									{errors.nombre.message}
+								</p>
+							)}
 						</div>
 
-						<button 
-							type="submit" 
-							className={`button ${Object.keys(errors).length > 0 ? 'animate__headShake' : ''}`} 
+						<div className="form-group">
+							<label htmlFor="telefono">Teléfono</label>
+							<input
+								type="tel"
+								id="telefono"
+								name="telefono"
+								placeholder="Ingrese su teléfono"
+								required
+								{...register('telefono')}
+							/>
+							{errors.telefono && (
+								<p className="error" style={errorMessageStyle}>
+									{errors.telefono.message}
+								</p>
+							)}
+						</div>
+
+						<div className="form-group">
+							<label htmlFor="email">Email</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								placeholder="Ingrese su email"
+								required
+								{...register('email')}
+							/>
+							{errors.email && (
+								<p className="error" style={errorMessageStyle}>
+									{errors.email.message}
+								</p>
+							)}
+						</div>
+
+						<div className="form-group">
+							<label htmlFor="mensaje">Mensaje</label>
+							<textarea
+								id="mensaje"
+								name="mensaje"
+								placeholder="Escriba su mensaje"
+								rows="4"
+								required
+								{...register('mensaje')}
+							></textarea>
+							{errors.mensaje && (
+								<p className="error" style={errorMessageStyle}>
+									{errors.mensaje.message}
+								</p>
+							)}
+						</div>
+
+						<button
+							type="submit"
+							className={`button ${
+								Object.keys(errors).length > 0 ? 'animate__headShake' : ''
+							}`}
 							disabled={isSubmitting}
 						>
 							{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
