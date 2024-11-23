@@ -2,9 +2,7 @@ import './Mobile_menu.css';
 import PropTypes from 'prop-types';
 
 function MobileMenu({ isOpen, setIsOpen }) {
-	// const [isOpen, setIsOpen] = useState(false);
 
-	// console.log(isOpen);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
