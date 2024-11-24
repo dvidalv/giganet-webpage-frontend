@@ -13,14 +13,14 @@ function Footer() {
 					<div className="footer_grid_item">
 						<IoLocationOutline color="#fff" className='footer-icon' />
 						<div className="footer_grid_item_content">
-							<p>Direccion</p>
+							<p>Dirección</p>
 							<a
 								href="https://maps.app.goo.gl/XwcVqy64qceAJigcA"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
 								<p>Calle 4 N. 16, Las Carolinas</p>
-								<p>La Vega, Republica Dominicana</p>
+								<p>La Vega, República Dominicana</p>
 							</a>
 						</div>
 					</div>
@@ -28,7 +28,7 @@ function Footer() {
 					<div className="footer_grid_item">
 						<IoCallOutline color="#fff" className='footer-icon' />
 						<div className="footer_grid_item_content">
-							<p>Telefono</p>
+							<p>Teléfono</p>
 							<a href="tel:829-661-2747">829-661-2747</a>
 							<a href="tel:682-560-2093">682-560-2093</a>
 						</div>
