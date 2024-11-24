@@ -3,7 +3,7 @@ let SERVER_URL = '';
 if (window.location.hostname === 'localhost') {
 	SERVER_URL = 'http://localhost:3001';
 } else {
-	SERVER_URL = 'https://giganet-backend.vercel.app/';
+	SERVER_URL = 'https://giganet-backend.vercel.app';
 }
 
 export const menuLinks = [

@@ -3,6 +3,7 @@ import SERVER_URL from '../utils/constants';
 
 export async function sendContactFormData(data) {
 	const url = `${SERVER_URL}/api/form-contact`;
+	console.log(url);
 	try {
 		console.log('Enviando datos:', data);
 
