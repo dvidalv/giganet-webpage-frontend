@@ -1,8 +1,12 @@
+import SERVER_URL from '../utils/constants';
+// console.log(SERVER_URL);
+
 export async function sendContactFormData(data) {
+	const url = `${SERVER_URL}/api/form-contact`;
 	try {
 		console.log('Enviando datos:', data);
 
-		const response = await fetch('http://localhost:3001/api/form-contact', {
+		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

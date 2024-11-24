@@ -1,9 +1,9 @@
-let API_URL = '';
+let SERVER_URL = '';
 
 if (window.location.hostname === 'localhost') {
-	API_URL = 'http://localhost:3001';
+	SERVER_URL = 'http://localhost:3001';
 } else {
-	API_URL = 'https://labcontreras-backend.vercel.app';
+	SERVER_URL = 'https://giganet-backend.vercel.app/';
 }
 
 export const menuLinks = [
@@ -18,4 +18,4 @@ export const menuLinks = [
 // export const FILEMAKER_DATABASE = 'lpcr';
 // export const FILEMAKER_LAYOUT = 'pacientes_web';
 
-export default API_URL;
+export default SERVER_URL;
