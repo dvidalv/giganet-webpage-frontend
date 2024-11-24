@@ -17,7 +17,7 @@ function Clientes() {
 						/>
 						<h3>Laboratorio de patologia contreras robledo</h3>
 						<p>
-							Giganet desarrolló desde cero una aplicación integral para la
+							<strong>Giganet</strong> desarrolló desde cero una aplicación integral para la
 							facturación, gestión de las ARS y generación de reportes de
 							estudios, adaptada a las necesidades de todo el laboratorio.
 						</p>
@@ -38,7 +38,10 @@ function Clientes() {
 						/>
 						<h3>Agrecon</h3>
 						<p>
-							Agrecon es una empresa que se dedica a la venta de cementos para la construcción, nosotros le desarrollamos un sistema hecho a la medida para el manejo de la venta y el transporte del cemento.
+							Agrecon es una empresa que se dedica a la venta de cementos para la
+							construcción en <strong>Giganet</strong> le desarrollamos un sistema
+							hecho a la medida para el manejo de la venta y el transporte del
+							cemento.
 						</p>
 						<p className="flex items-center gap-2 ">
 							<a href="#" target="_blank">
@@ -58,7 +61,7 @@ function Clientes() {
 						/>
 						<h3>SokaGakai Internacional RD</h3>
 						<p>
-							Giganet desarrolló desde cero la aplicación para el manejo de todos los miembros de la organización.
+							<strong>Giganet</strong> desarrolló desde cero la aplicación para el manejo de todos los miembros de la organización.
 						</p>
 						<p className="flex items-center gap-2 ">
 							<a href="#" target="_blank">
@@ -78,7 +81,9 @@ function Clientes() {
 						/>
 						<h3>BioPap</h3>
 						<p>
-						Giganet desarrolló desde cero una aplicación integral para la facturación, gestión de las ARS y generación de reportes de estudios, adaptada a las necesidades de todo el laboratorio.
+							<strong>Giganet</strong> desarrolló desde cero una aplicación integral
+							para la facturación, gestión de las ARS y generación de reportes de
+							estudios, adaptada a las necesidades de todo el laboratorio.
 						</p>
 						<p className="flex items-center gap-2 ">
 							<a href="#" target="_blank">

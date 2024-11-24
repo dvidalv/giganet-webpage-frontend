@@ -8,11 +8,11 @@ function Nosotros() {
 					<div className="imagen_nosotros"></div>
 					<div className="texto_nosotros">
 						<p>
-							En GigaNet, estamos convencidos de que las empresas logran el
-							éxito al utilizar la tecnología como una ventaja estratégica. Como
-							desarrolladores de software a medida, ayudamos a eliminar las
-							limitaciones de los sistemas antiguos, brindando a nuestros
-							clientes el poder de aprovechar nuevas oportunidades con
+							En <strong>GigaNet</strong>, estamos convencidos de que las
+							empresas logran el éxito al utilizar la tecnología como una ventaja
+							estratégica. Como desarrolladores de software a medida, ayudamos a
+							eliminar las limitaciones de los sistemas antiguos, brindando a
+							nuestros clientes el poder de aprovechar nuevas oportunidades con
 							soluciones tecnológicas avanzadas. Creemos que la tecnología debe
 							ser un recurso valioso, no una carga. Diseñamos soluciones
 							personalizadas que se ajustan a las necesidades particulares de
