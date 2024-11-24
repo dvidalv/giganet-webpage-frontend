@@ -15,38 +15,18 @@ import { useEffect, useState } from 'react';
 
 import 'animate.css';
 import { sendContactFormData } from '../../api/api';
+import { getLocation } from '../../api/api';
 
 
 function Contacto() {
 	const [locationStatus, setLocationStatus] = useState('');
 
-	console.log(locationStatus);
+	// console.log(locationStatus);
 
-	const getLocation = async () => {
-		try {
-			const position = await new Promise((resolve, reject) => {
-				navigator.geolocation.getCurrentPosition(resolve, reject);
-			});
-			const { latitude, longitude } = position.coords;
-			
-			// Obtener el nombre de la ciudad usando Nominatim
-			const response = await fetch(
-				`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-			);
-			const data = await response.json();
-			const city = data.address.city || data.address.town || data.address.village;
-			
-			setLocationStatus(`Ubicación: ${city}`);
-			console.log('Ciudad:', city);
-			
-		} catch (error) {
-			console.log(error.message);
-			setLocationStatus('Error al obtener la ubicación');
-		}
-	};
+	
 
 	useEffect(() => {
-		getLocation();
+		getLocation(setLocationStatus);
 	}, []);
 
 	const {
@@ -60,6 +40,7 @@ function Contacto() {
 	});
 
 	const onSubmit = (data) => {
+		data.location = locationStatus;
 		console.log(data);
 		sendContactFormData(data);
 		reset();
@@ -173,6 +154,11 @@ function Contacto() {
 								</p>
 							)}
 						</div>
+						{locationStatus && (
+							<p style={{ color: locationStatus.includes('Error') ? 'red' : 'green', marginBottom: '10px', textAlign: 'center' }}>
+								{locationStatus}
+							</p>
+						)}
 
 						<button
 							type="submit"
