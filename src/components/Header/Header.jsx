@@ -1,13 +1,15 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import MobileMenu from '../Mobile_menu/MobileMenu';
+import MenuLink from '../DropDown/MenuLink';
+import DropDown from '../DropDown/DropDown';
+
+import { MobileContext } from '../../store/mobileContext';
+import { menuLinks } from '../../utils/constants';
 
 import './Header.css';
 import logo from '../../assets/images/giganet_logo.png';
-import MobileMenu from '../Mobile_menu/MobileMenu';
-import { menuLinks } from '../../utils/constants';
-import MenuLink from '../DropDown/MenuLink';
-import DropDown from '../DropDown/DropDown';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { MobileContext } from '../../store/mobileContext';
 
 function Header() {
 	const navigate = useNavigate();
@@ -49,7 +51,7 @@ function Header() {
 	return (
 		<div className="header">
 			<div className="contenido_header contenedor">
-				<div className="imgen_header" onClick={(e) => handleScroll(e, 'hero')}>
+				<div className="imagen_header" onClick={(e) => handleScroll(e, 'hero')}>
 					<img src={logo} alt="logo" className="w-[170px] mb-4" />
 				</div>
 

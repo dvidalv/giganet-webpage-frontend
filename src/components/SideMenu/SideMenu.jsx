@@ -1,9 +1,12 @@
+import { useNavigate, useLocation } from 'react-router-dom';
 import { menuLinks } from '../../utils/constants';
+
 import PropTypes from 'prop-types';
+
 import './SideMenu.css';
-import { useNavigate } from 'react-router-dom';
 function SideMenu({ isOpen, onClose }) {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const handleScroll = (e, sectionId) => {
 		e.preventDefault();
 

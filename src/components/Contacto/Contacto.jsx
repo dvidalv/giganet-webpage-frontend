@@ -1,21 +1,22 @@
-import './Contacto.css';
-import imagenContacto from '../../assets/images/contact.jpg';
-import Header from '../Header/Header';
+import { useEffect, useState } from 'react';
+import { Form } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form } from 'react-router-dom';
+import 'animate.css';
+
+import './Contacto.css';
+import Header from '../Header/Header';
+import { sendContactFormData } from '../../api/api';
+import { getLocation } from '../../api/api';
 const schema = z.object({
 	nombre: z.string().min(1, { message: 'El nombre es requerido' }),
 	telefono: z.string().min(1, { message: 'El teléfono es requerido' }),
 	email: z.string().email({ message: 'El email es requerido' }),
 	mensaje: z.string().min(1, { message: 'El mensaje es requerido' }),
 });
-import { useEffect, useState } from 'react';
 
-import 'animate.css';
-import { sendContactFormData } from '../../api/api';
-import { getLocation } from '../../api/api';
 
 
 function Contacto() {

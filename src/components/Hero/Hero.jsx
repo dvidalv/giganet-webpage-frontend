@@ -4,15 +4,18 @@ function Hero() {
 	return (
 		<main className="hero contenedor" id="hero">
 			<div className="contenido_hero">
-				<h1>Desarrollamos Programas Personalizados</h1>
+				<h1>Desarrollamos Soluciones Tecnológicas a tu Medida</h1>
 				<p>
-					GigaNet es una empresa que se dedica a la creación de programas
-					personalizados para empresas y particulares. Nuestro equipo de
-					expertos en desarrollo de software está comprometido en ofrecerte
-					soluciones innovadoras y eficientes para tus necesidades específicas.
+					En GigaNet nos especializamos en el desarrollo de software 
+					personalizado para empresas y particulares. Nuestro equipo de 
+					expertos está comprometido con la excelencia, ofreciendo 
+					soluciones innovadoras y eficientes que se adaptan 
+					perfectamente a tus necesidades específicas.
 				</p>
 				<div className="button_hero">
-					<button className="button" onClick={() => window.location.href='contact'}>Contáctanos</button>
+					<button className="button" onClick={() => window.location.href='contact'}>
+						Solicita una Consulta
+					</button>
 				</div>
 			</div>
 			<div className="imagen_hero">

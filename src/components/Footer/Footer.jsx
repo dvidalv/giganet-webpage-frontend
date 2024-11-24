@@ -38,7 +38,7 @@ function Footer() {
 						<IoMailOutline color="#fff" className="footer-icon" />
 						<div className="footer_grid_item_content">
 							<p>Email</p>
-							<a href="mailto:info@giganet-srl">info@giganet-srl.com</a>
+							<a href="mailto:info@giganet-srl.com">info@giganet-srl.com</a>
 						</div>
 					</div>
 				</div>

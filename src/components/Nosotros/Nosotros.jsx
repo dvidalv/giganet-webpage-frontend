@@ -17,7 +17,7 @@ function Nosotros() {
 							ser un recurso valioso, no una carga. Diseñamos soluciones
 							personalizadas que se ajustan a las necesidades particulares de
 							cada negocio, optimizando los procesos y flujos de trabajo únicos
-							de cada cliente. Nuestro equipo de  técnicos expertos trabaja de
+							de cada cliente. Nuestro equipo de técnicos expertos trabaja de
 							manera consultiva, aprovechando su conocimiento colectivo para
 							comprender a fondo su negocio y crear soluciones innovadoras que
 							respondan a sus requerimientos específicos.

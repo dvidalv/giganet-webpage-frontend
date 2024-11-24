@@ -38,7 +38,7 @@ function Clientes() {
 						/>
 						<h3>Agrecon</h3>
 						<p>
-						Agrecon es una empresa que se dedica a la venta de cemetos para la contruccion, nosotros le desarrollamos un sistema hecho a la medida para el menejo de la venta y el transporte del cemento
+							Agrecon es una empresa que se dedica a la venta de cementos para la construcción, nosotros le desarrollamos un sistema hecho a la medida para el manejo de la venta y el transporte del cemento.
 						</p>
 						<p className="flex items-center gap-2 ">
 							<a href="#" target="_blank">
@@ -58,7 +58,7 @@ function Clientes() {
 						/>
 						<h3>SokaGakai Internacional RD</h3>
 						<p>
-						Giganet Desarrollo desde cero la aplicacion el menjo de todos los miembros de la organizacion.
+							Giganet desarrolló desde cero la aplicación para el manejo de todos los miembros de la organización.
 						</p>
 						<p className="flex items-center gap-2 ">
 							<a href="#" target="_blank">

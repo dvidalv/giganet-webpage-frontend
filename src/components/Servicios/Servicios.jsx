@@ -1,8 +1,10 @@
-import './Servicios.css';
+import { useState } from 'react';
+
 import nube from '../../assets/images/nube.png';
 import file from '../../assets/images/file.png';
 import app from '../../assets/images/app.png';
-import { useState } from 'react';
+
+import './Servicios.css';
 
 function Servicios() {
 	const [serviciosFlipped, setServiciosFlipped] = useState([false, false, false]);
@@ -23,7 +25,7 @@ function Servicios() {
 					<div className={`servicio ${serviciosFlipped[0] ? 'flipped' : ''}`} onClick={() => toggleFlip(0)}>
 						<div className="servicio-inner">
 							<div className="servicio-front">
-								<img src={nube} alt="imagen" />
+								<img src={nube} alt="icono de servicios en la nube" />
 								<h3>Nube</h3>
 								<p>
 									Potencie el crecimiento de su negocio mediante servicios y
@@ -49,7 +51,7 @@ function Servicios() {
 					<div className={`servicio ${serviciosFlipped[1] ? 'flipped' : ''}`} onClick={() => toggleFlip(1)}>
 						<div className="servicio-inner">
 							<div className="servicio-front">
-								<img src={file} alt="imagen" />
+								<img src={file} alt="icono de FileMaker" />
 								<h3>FileMaker</h3>
 								<p>
 									FileMaker es una plataforma de desarrollo de bases de datos relacionales que permite crear aplicaciones personalizadas para la gestión de datos.
@@ -73,7 +75,7 @@ function Servicios() {
 					<div className={`servicio ${serviciosFlipped[2] ? 'flipped' : ''}`} onClick={() => toggleFlip(2)}>
 						<div className="servicio-inner">
 							<div className="servicio-front">
-								<img src={app} alt="imagen" />
+								<img src={app} alt="icono de aplicaciones web" />
 								<h3>Aplicaciones Web</h3>
 								<p>Dale vida a tu negocio con aplicaciones web personalizadas que mejoran la eficiencia y la experiencia del usuario.</p>
 							</div>
