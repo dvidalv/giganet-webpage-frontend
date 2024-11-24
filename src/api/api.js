@@ -1,12 +1,10 @@
 import SERVER_URL from '../utils/constants';
-// console.log(SERVER_URL);
+
 
 export async function sendContactFormData(data) {
 	const url = `${SERVER_URL}/api/form-contact`;
-	console.log(url);
-	try {
-		console.log('Enviando datos:', data);
 
+	try {
 		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
@@ -18,7 +16,6 @@ export async function sendContactFormData(data) {
 		console.log('Estado de la respuesta:', response.status);
 
 		const responseData = await response.json();
-		console.log('Respuesta del servidor:', responseData);
 		return responseData;
 	} catch (error) {
 		console.error('Error en la petición:', error);
@@ -41,7 +38,7 @@ export const getLocation = async (setLocationStatus) => {
 		const city = data.address.city || data.address.town || data.address.village;
 		
 		setLocationStatus(`Ubicación: ${city}`);
-		console.log('Ciudad:', city);
+
 		
 	} catch (error) {
 		console.log(error.message);

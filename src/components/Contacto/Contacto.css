@@ -118,3 +118,14 @@
 		}
 	}
 }
+
+.success-message {
+	color: #fffefe;
+	font-weight: 500;
+	font-size: 1.2rem;
+	text-align: center;
+	margin-top: 10px;
+	background-color: #36ab49;
+	padding: 10px;
+	border-radius: 5px;
+}

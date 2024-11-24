@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import 'animate.css';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import './Contacto.css';
 import Header from '../Header/Header';
@@ -17,14 +18,11 @@ const schema = z.object({
 	mensaje: z.string().min(1, { message: 'El mensaje es requerido' }),
 });
 
-
-
 function Contacto() {
 	const [locationStatus, setLocationStatus] = useState('');
-
+	const [successMessage, setSuccessMessage] = useState(false);
+	let timeOutId;
 	// console.log(locationStatus);
-
-	
 
 	useEffect(() => {
 		getLocation(setLocationStatus);
@@ -42,10 +40,18 @@ function Contacto() {
 
 	const onSubmit = (data) => {
 		data.location = locationStatus;
-		console.log(data);
 		sendContactFormData(data);
+		setSuccessMessage(true);
+		timeOutId = setTimeout(() => {
+			setSuccessMessage(false);
+		}, 5000);
+
 		reset();
 	};
+
+	useEffect(() => {
+		return () => clearTimeout(timeOutId);
+	}, [timeOutId]);
 
 	const errorMessageStyle = {
 		color: '#ff0000',
@@ -155,8 +161,30 @@ function Contacto() {
 								</p>
 							)}
 						</div>
+						<AnimatePresence>
+							{successMessage && (
+								<motion.div
+									className="success-message"
+									initial={{ opacity: 0, y: -20 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: -20 }}
+									transition={{
+										duration: 0.3,
+										ease: 'easeOut',
+									}}
+								>
+									¡Mensaje enviado con éxito!
+								</motion.div>
+							)}
+						</AnimatePresence>
 						{locationStatus && (
-							<p style={{ color: locationStatus.includes('Error') ? 'red' : 'green', marginBottom: '10px', textAlign: 'center' }}>
+							<p
+								style={{
+									color: locationStatus.includes('Error') ? 'red' : 'green',
+									marginBottom: '10px',
+									textAlign: 'center',
+								}}
+							>
 								{locationStatus}
 							</p>
 						)}
