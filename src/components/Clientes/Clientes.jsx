@@ -36,7 +36,7 @@ function Clientes() {
 							src={agrecon}
 							alt="logo Agrecon"
 						/>
-						<h3>Agrecon</h3>
+						<h3>AGRECON</h3>
 						<p>
 							AGRECON es una empresa que se dedica a la venta de cementos para la
 							construcción en <strong>Giganet</strong> le desarrollamos un sistema
@@ -59,7 +59,7 @@ function Clientes() {
 							src={sgi}
 							alt="logo SGI"
 						/>
-						<h3>SokaGakai Internacional RD</h3>
+						<h3>SOKAGAKAI INTERNACIONAL RD</h3>
 						<p>
 							<strong>Giganet</strong> desarrolló desde cero la aplicación para el manejo de todos los miembros de la organización.
 						</p>
@@ -79,7 +79,7 @@ function Clientes() {
 							src={biopap}
 							alt="logo Biopap"
 						/>
-						<h3>BioPap</h3>
+						<h3>BIOPAP</h3>
 						<p>
 							<strong>Giganet</strong> desarrolló desde cero una aplicación integral
 							para la facturación, gestión de las ARS y generación de reportes de
