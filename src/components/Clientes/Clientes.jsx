@@ -13,9 +13,9 @@ function Clientes() {
 					<div className="cliente">
 						<img
 							src={lpcr}
-							alt="logo Laboratorio de patologia contreras robledo"
+							alt="logo Laboratorio de patología contreras robledo"
 						/>
-						<h3>Laboratorio de patologia contreras robledo</h3>
+						<h3>Laboratorio de Patología Contreras Robledo</h3>
 						<p>
 							<strong>Giganet</strong> desarrolló desde cero una aplicación integral para la
 							facturación, gestión de las ARS y generación de reportes de
@@ -38,7 +38,7 @@ function Clientes() {
 						/>
 						<h3>Agrecon</h3>
 						<p>
-							Agrecon es una empresa que se dedica a la venta de cementos para la
+							AGRECON es una empresa que se dedica a la venta de cementos para la
 							construcción en <strong>Giganet</strong> le desarrollamos un sistema
 							hecho a la medida para el manejo de la venta y el transporte del
 							cemento.
