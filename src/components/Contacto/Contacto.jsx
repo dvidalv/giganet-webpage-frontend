@@ -25,6 +25,7 @@ function Contacto() {
 	// console.log(locationStatus);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		getLocation(setLocationStatus);
 	}, []);
 

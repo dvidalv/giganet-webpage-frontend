@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import MobileMenu from '../Mobile_menu/MobileMenu';
 import MenuLink from '../DropDown/MenuLink';
@@ -15,10 +15,13 @@ function Header() {
 	const navigate = useNavigate();
 	const { menuState, toggleSideMenu } = useContext(MobileContext);
 	const [activeSection, setActiveSection] = useState('hero');
+	const location = useLocation();
 
 	// Add scroll event listener to track active section
 	useEffect(() => {
 		const handleScroll = () => {
+			if (location.pathname === '/contact') return;
+
 			const sections = menuLinks.map((link) =>
 				document.getElementById(link.to)
 			);
@@ -38,7 +41,7 @@ function Header() {
 
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, []);
+	}, [location.pathname]);
 
 	const handleScroll = (e, sectionId) => {
 		e.preventDefault();
@@ -72,7 +75,10 @@ function Header() {
 		if (path === 'contact') {
 			return location.pathname === '/contact';
 		}
-		return activeSection === path;
+		if (location.pathname === '/') {
+			return activeSection === path;
+		}
+		return false;
 	};
 
 	return (
