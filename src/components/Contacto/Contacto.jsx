@@ -11,6 +11,9 @@ import './Contacto.css';
 import Header from '../Header/Header';
 import { sendContactFormData } from '../../api/api';
 import { getLocation } from '../../api/api';
+
+import { IoLocationOutline } from 'react-icons/io5';
+
 const schema = z.object({
 	nombre: z.string().min(1, { message: 'El nombre es requerido' }),
 	telefono: z.string().min(1, { message: 'El teléfono es requerido' }),
@@ -186,7 +189,10 @@ function Contacto() {
 									textAlign: 'center',
 								}}
 							>
-								{locationStatus}
+								<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+									<IoLocationOutline color="#fff" className='footer-icon' style={{ marginRight: '10px', fontSize: '1.5rem', color: 'green' }} />
+								</div>
+								<p style={{ color: locationStatus.includes('Error') ? 'red' : 'green', fontSize: '1rem' }}>{locationStatus}</p>
 							</p>
 						)}
 
