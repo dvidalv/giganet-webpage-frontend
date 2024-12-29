@@ -1,0 +1,14 @@
+.navbar__link {
+	/* Estilos base del link */
+	text-decoration: none;
+	padding: 10px;
+	transition: all 0.3s ease;
+}
+
+.navbar__link.active {
+	/* Estilos cuando el link está activo */
+	color: #007bff !important; /* O el color que prefieras */
+	font-weight: bold;
+	/* Puedes agregar un subrayado o cualquier otro estilo visual */
+	border-bottom: 2px solid currentColor;
+}

@@ -10,10 +10,14 @@ import { MobileContextProvider } from './store/mobileContext.jsx';
 
  
 const router = createBrowserRouter([
-	{ path: '/', element: <App />, children: [
-		{ path: '/', element: <Main /> },
-		{ path: '/contact', element: <Contacto /> },
-	] },
+	{
+		path: '/',
+		element: <App />,
+		children: [
+			{ index: true, element: <Main /> },
+			{ path: 'contact', element: <Contacto /> },
+		],
+	},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

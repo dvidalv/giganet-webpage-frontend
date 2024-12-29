@@ -12,7 +12,6 @@
 	padding: 15px;
 	height: var(--header-height);
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-	
 
 	.contenido_header {
 		display: flex;
@@ -43,6 +42,7 @@
 				font-weight: 600;
 				color: #6d6c6c;
 				transition: all 0.3s ease;
+				position: relative;
 
 				@media (min-width: 768px) {
 					font-size: clamp(14px, 1.5vw, 18px);
@@ -52,6 +52,11 @@
 					font-size: clamp(16px, 1.8vw, 22px);
 				}
 			}
+
+			li.active {
+				color: var(--color-primary);
+			}
+
 			li::after {
 				content: '';
 				display: block;
@@ -59,8 +64,12 @@
 				height: 4px;
 				background-color: var(--color-primary);
 				transition: all 0.3s ease;
+				position: absolute;
+				bottom: -4px;
+				left: 0;
 			}
 
+			li.active::after,
 			li:hover::after {
 				width: 100%;
 			}

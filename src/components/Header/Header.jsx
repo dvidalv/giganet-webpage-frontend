@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import MobileMenu from '../Mobile_menu/MobileMenu';
@@ -14,12 +14,36 @@ import logo from '../../assets/images/giganet_logo.png';
 function Header() {
 	const navigate = useNavigate();
 	const { menuState, toggleSideMenu } = useContext(MobileContext);
+	const [activeSection, setActiveSection] = useState('hero');
 
+	// Add scroll event listener to track active section
+	useEffect(() => {
+		const handleScroll = () => {
+			const sections = menuLinks.map((link) =>
+				document.getElementById(link.to)
+			);
+			const scrollPosition = window.scrollY + window.innerHeight / 3;
 
-	
+			sections.forEach((section) => {
+				if (!section) return;
+
+				const sectionTop = section.offsetTop;
+				const sectionBottom = sectionTop + section.offsetHeight;
+
+				if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+					setActiveSection(section.id);
+				}
+			});
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
 	const handleScroll = (e, sectionId) => {
 		e.preventDefault();
-		
+		setActiveSection(sectionId);
+
 		if (sectionId === 'contact') {
 			navigate('/contact');
 			return;
@@ -43,9 +67,12 @@ function Header() {
 			console.warn(`Section with id "${sectionId}" not found`);
 		}
 	};
+
 	const isActive = (path) => {
-		if (path === '/') return location.pathname === '/';
-		return location.pathname.startsWith(path); // true or false
+		if (path === 'contact') {
+			return location.pathname === '/contact';
+		}
+		return activeSection === path;
 	};
 
 	return (
@@ -77,12 +104,13 @@ function Header() {
 					</ul>
 				</div>
 
-				<MobileMenu isOpen={menuState.isSideMenuOpen} setIsOpen={toggleSideMenu} />
+				<MobileMenu
+					isOpen={menuState.isSideMenuOpen}
+					setIsOpen={toggleSideMenu}
+				/>
 			</div>
 		</div>
 	);
 }
-
-
 
 export default Header;

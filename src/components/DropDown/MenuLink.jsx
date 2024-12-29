@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './MenuLinks.css';
 
 function MenuLink({
 	color,
@@ -8,22 +9,23 @@ function MenuLink({
 	text,
 	children,
 	isOpen,
-	isActive,
 	setOpenSubmenu,
+	isActive,
 }) {
 	const onMouseLeave = () => {
 		setOpenSubmenu(null);
 	};
+
 	return (
-		<li className="navbar__item">
-			<Link
+		<li className={`navbar__item ${isActive ? 'active' : ''}`}>
+			<NavLink
 				to={to}
 				className={`navbar__link ${isActive ? 'active' : ''}`}
 				style={{ color: color }}
 				onClick={onClick}
 			>
 				{text}
-			</Link>
+			</NavLink>
 			{children && isOpen && (
 				<ul className="dropdown" onMouseLeave={onMouseLeave}>
 					{children}
