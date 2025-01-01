@@ -70,33 +70,6 @@ function Contacto() {
 			<div className="form_container">
 				<div className="contact" id="contact">
 					<h1>Contacto</h1>
-					{/* <button
-						onClick={getLocation}
-						style={{
-							marginBottom: '10px',
-							display: 'block',
-							width: '40%',
-							backgroundColor: '#000',
-							color: '#fff',
-							padding: '10px',
-							borderRadius: '5px',
-							marginLeft: 'auto',
-							marginRight: 'auto',
-						}}
-					>
-						Compartir Ubicación
-					</button>
-					{locationStatus && (
-						<p
-							style={{
-								color: locationStatus.includes('Error') ? 'red' : 'green',
-								marginBottom: '10px',
-								textAlign: 'center',
-							}}
-						>
-							{locationStatus}
-						</p>
-					)} */}
 					<Form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
 						<div className="form-group">
 							<label htmlFor="nombre">Nombre</label>
