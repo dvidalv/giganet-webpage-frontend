@@ -1,6 +1,5 @@
 import SERVER_URL from '../utils/constants';
 
-
 export async function sendContactFormData(data) {
 	const url = `${SERVER_URL}/api/form-contact`;
 
@@ -13,13 +12,27 @@ export async function sendContactFormData(data) {
 			body: JSON.stringify(data),
 		});
 
-		console.log('Estado de la respuesta:', response.status);
+		// Verificar si la respuesta es exitosa
+		if (!response.ok) {
+			return {
+				success: false,
+				message: 'Error en el servidor',
+				status: response.status,
+			};
+		}
 
 		const responseData = await response.json();
-		return responseData;
+		return {
+			success: true,
+			data: responseData,
+		};
 	} catch (error) {
 		console.error('Error en la petición:', error);
-		throw error;
+		return {
+			success: false,
+			message: 'El servidor no está disponible',
+			error: error.message,
+		};
 	}
 }
 
@@ -29,17 +42,15 @@ export const getLocation = async (setLocationStatus) => {
 			navigator.geolocation.getCurrentPosition(resolve, reject);
 		});
 		const { latitude, longitude } = position.coords;
-		
+
 		// Obtener el nombre de la ciudad usando Nominatim
 		const response = await fetch(
 			`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 		);
 		const data = await response.json();
 		const city = data.address.city || data.address.town || data.address.village;
-		
-		setLocationStatus(`Ubicación: ${city}`);
 
-		
+		setLocationStatus(`Ubicación: ${city}`);
 	} catch (error) {
 		console.log(error.message);
 		setLocationStatus('Error al obtener la ubicación');

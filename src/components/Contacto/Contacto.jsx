@@ -1,68 +1,70 @@
-import { useEffect, useState } from 'react';
-import { Form } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import 'animate.css';
-import { motion, AnimatePresence } from 'framer-motion';
-
 import './Contacto.css';
 import Header from '../Header/Header';
-import { sendContactFormData } from '../../api/api';
+
+import { Form, useActionData, useNavigation } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import { getLocation } from '../../api/api';
 
-import { IoLocationOutline } from 'react-icons/io5';
-
-const schema = z.object({
-	nombre: z.string().min(1, { message: 'El nombre es requerido' }),
-	telefono: z.string().min(1, { message: 'El teléfono es requerido' }),
-	email: z.string().email({ message: 'El email es requerido' }),
-	mensaje: z.string().min(1, { message: 'El mensaje es requerido' }),
-});
+import 'animate.css';
+import { motion, AnimatePresence } from 'motion/react';
 
 function Contacto() {
+	const formRef = useRef(null);
+	const response = useActionData();
 	const [locationStatus, setLocationStatus] = useState('');
-	const [successMessage, setSuccessMessage] = useState(false);
-	let timeOutId;
-	// console.log(locationStatus);
+	const [error, setError] = useState(false);
+	const [message, setMessage] = useState('');
+
 
 	useEffect(() => {
-		window.scrollTo(0, 0);
 		getLocation(setLocationStatus);
 	}, []);
 
-	const {
-		register,
-		handleSubmit,
-		setError, // eslint-disable-line
-		reset,
-		formState: { errors, isSubmitting },
-	} = useForm({
-		resolver: zodResolver(schema),
-	});
+	useEffect(() => {
+		if (!response) return;
 
-	const onSubmit = (data) => {
-		data.location = locationStatus;
-		sendContactFormData(data);
-		setSuccessMessage(true);
-		timeOutId = setTimeout(() => {
-			setSuccessMessage(false);
-		}, 5000);
+		const isSuccess = response.success === true;
+		setError(!isSuccess);
 
-		reset();
-	};
+		if (isSuccess) {
+			formRef.current.reset();
+			setLocationStatus('');
+		}
+
+		setMessage(
+			response.data?.message ||
+				(isSuccess ? 'Mensaje enviado con éxito' : 'Error al enviar el mensaje')
+		);
+	}, [response]);
 
 	useEffect(() => {
-		return () => clearTimeout(timeOutId);
-	}, [timeOutId]);
+		if (message) {
+			const timer = setTimeout(() => {
+				setMessage('');
+			}, 3000);
+			return () => clearTimeout(timer);
+		}
+	}, [message]);
 
-	const errorMessageStyle = {
-		color: '#ff0000',
-		fontSize: '0.8rem',
-		marginTop: '4px',
+	const navigation = useNavigation();
+	const isSubmitting = navigation.state === 'submitting';
+
+	// Función para determinar el estilo del mensaje basado en el tipo
+	const getMessageStyle = (isError) => ({
+		background: isError
+			? 'linear-gradient(135deg, #ff4444 0%, #cc0000 100%)'
+			: 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)',
+		color: 'white',
+		padding: '15px 20px',
+		borderRadius: '8px',
+		boxShadow: isError
+			? '0 4px 15px rgba(204, 0, 0, 0.2)'
+			: '0 4px 15px rgba(76, 175, 80, 0.2)',
+		margin: '20px 0',
+		textAlign: 'center',
+		fontSize: '16px',
 		fontWeight: '500',
-	};
+	});
 
 	return (
 		<>
@@ -70,7 +72,13 @@ function Contacto() {
 			<div className="form_container">
 				<div className="contact" id="contact">
 					<h1>Contacto</h1>
-					<Form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
+					<Form
+						ref={formRef}
+						method="post"
+						className="contact-form"
+						action="/contact"
+					>
+						<input type="hidden" name="locationStatus" value={locationStatus} />
 						<div className="form-group">
 							<label htmlFor="nombre">Nombre</label>
 							<input
@@ -79,13 +87,7 @@ function Contacto() {
 								name="nombre"
 								placeholder="Ingrese su nombre"
 								required
-								{...register('nombre')}
 							/>
-							{errors.nombre && (
-								<p className="error" style={errorMessageStyle}>
-									{errors.nombre.message}
-								</p>
-							)}
 						</div>
 
 						<div className="form-group">
@@ -96,13 +98,7 @@ function Contacto() {
 								name="telefono"
 								placeholder="Ingrese su teléfono"
 								required
-								{...register('telefono')}
 							/>
-							{errors.telefono && (
-								<p className="error" style={errorMessageStyle}>
-									{errors.telefono.message}
-								</p>
-							)}
 						</div>
 
 						<div className="form-group">
@@ -113,13 +109,7 @@ function Contacto() {
 								name="email"
 								placeholder="Ingrese su email"
 								required
-								{...register('email')}
 							/>
-							{errors.email && (
-								<p className="error" style={errorMessageStyle}>
-									{errors.email.message}
-								</p>
-							)}
 						</div>
 
 						<div className="form-group">
@@ -130,54 +120,35 @@ function Contacto() {
 								placeholder="Escriba su mensaje"
 								rows="4"
 								required
-								{...register('mensaje')}
 							></textarea>
-							{errors.mensaje && (
-								<p className="error" style={errorMessageStyle}>
-									{errors.mensaje.message}
-								</p>
-							)}
 						</div>
+
 						<AnimatePresence>
-							{successMessage && (
+							{message && (
 								<motion.div
-									className="success-message"
 									initial={{ opacity: 0, y: -20 }}
 									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -20 }}
-									transition={{
-										duration: 0.3,
-										ease: 'easeOut',
-									}}
+									exit={{ opacity: 0, y: 20 }}
+									transition={{ duration: 0.5, ease: 'easeOut' }}
+									style={getMessageStyle(error)}
 								>
-									¡Mensaje enviado con éxito!
+									<motion.span
+										initial={{ scale: 0.8 }}
+										animate={{ scale: 1 }}
+										transition={{ delay: 0.2 }}
+									>
+										{error ? '❌' : '✓'} {message}
+									</motion.span>
 								</motion.div>
 							)}
 						</AnimatePresence>
-						{locationStatus && (
-							<p
-								style={{
-									color: locationStatus.includes('Error') ? 'red' : 'green',
-									marginBottom: '10px',
-									textAlign: 'center',
-								}}
-							>
-								<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-									<IoLocationOutline color="#fff" className='footer-icon' style={{ marginRight: '10px', fontSize: '1.5rem', color: 'green' }} />
-								</div>
-								<p style={{ color: locationStatus.includes('Error') ? 'red' : 'green', fontSize: '1rem' }}>{locationStatus}</p>
-							</p>
-						)}
 
-						<button
-							type="submit"
-							className={`button ${
-								Object.keys(errors).length > 0 ? 'animate__headShake' : ''
-							}`}
-							disabled={isSubmitting}
-						>
+						<button type="submit" className={`button`}>
 							{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
 						</button>
+						<p style={{ fontSize: '12px', color: 'gray', textAlign: 'center' }}>
+							{locationStatus}
+						</p>
 					</Form>
 				</div>
 			</div>
