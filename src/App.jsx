@@ -1,21 +1,24 @@
 import './App.css';
-import Header from './components/Header/Header';
-import { Outlet } from 'react-router-dom';
-import Footer from './components/Footer/Footer';
-import SideMenu from './components/SideMenu/SideMenu';
-import { MobileContext } from './store/mobileContext';
-import { useContext } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Main from './components/Main/Main.jsx';
+import Contacto from './components/Contacto/Contacto.jsx';
+import './index.css';
+import Root from './components/Root/Root.jsx';
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <Root />,
+		children: [
+			{ index: true, element: <Main /> },
+			{ path: 'contact', element: <Contacto /> },
+		],
+	},
+]);
 
 function App() {
-	const { menuState, toggleSideMenu } = useContext(MobileContext);
-
 	return (
-		<>
-			<Header />
-			<Outlet />
-			<Footer />
-			<SideMenu isOpen={menuState.isSideMenuOpen} onClose={toggleSideMenu} />
-		</>
+		<RouterProvider router={router} />
 	);
 }
 
