@@ -4,6 +4,8 @@ import Header from '../Header/Header';
 import { Form, useActionData, useNavigation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { getLocation } from '../../api/api';
+import { MdLocationOn } from 'react-icons/md';
+
 
 import 'animate.css';
 import { motion, AnimatePresence } from 'motion/react';
@@ -146,7 +148,8 @@ function Contacto() {
 						<button type="submit" className={`button`}>
 							{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
 						</button>
-						<p style={{ fontSize: '12px', color: 'gray', textAlign: 'center' }}>
+						<p style={{ fontSize: '12px', color: 'gray', textAlign: 'center', display: 'flex', alignItems: 'center', gap: '5px', justifyContent: 'center' }}>
+							<MdLocationOn style={{ fontSize: '16px' }} />
 							{locationStatus}
 						</p>
 					</Form>
