@@ -55,7 +55,7 @@ function Header() {
 		e.preventDefault();
 		setActiveSection(sectionId);
 
-		// Handle special routes first
+		// Manejar rutas especiales
 		if (sectionId === 'login') {
 			navigate('/login');
 			return;
@@ -63,6 +63,7 @@ function Header() {
 
 		if (sectionId === 'contact') {
 			navigate('/contact');
+			window.scrollTo(0, 0); // Añadir scroll al top
 			return;
 		}
 
