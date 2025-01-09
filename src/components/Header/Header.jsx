@@ -47,7 +47,7 @@ function Header() {
 		e.preventDefault();
 		setActiveSection(sectionId);
 
-		// Manejar rutas especiales
+		// Handle special routes first
 		if (sectionId === 'login') {
 			navigate('/login');
 			return;

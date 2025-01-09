@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MenuLinkMobile.css';
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 
 function MenuLinkMobile({ to, text, isSubmenu, children, onClick }) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +24,7 @@ MenuLinkMobile.propTypes = {
 	text: PropTypes.string.isRequired,
 	isSubmenu: PropTypes.bool.isRequired,
 	children: PropTypes.node,
+	onClick: PropTypes.func,
 };
 
 export default MenuLinkMobile;
