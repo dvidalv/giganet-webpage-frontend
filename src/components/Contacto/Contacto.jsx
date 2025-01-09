@@ -63,10 +63,10 @@ function Contacto() {
 	});
 
 	return (
-		<div className="form_container">
-			<div className="contact">
+		<div className="contacto" id="contacto">
+			<div className="contacto-container">
 				<h1>Contacto</h1>
-				<Form ref={formRef} method="post" className="contact-form">
+				<Form ref={formRef} method="post" className="contacto-form">
 					<div className="form-group">
 						<label htmlFor="nombre">Nombre</label>
 						<input
@@ -113,12 +113,6 @@ function Contacto() {
 
 					<input type="hidden" name="locationStatus" value={locationStatus} />
 
-					{/* <p className="email-notice">
-						Nota: Para asegurar la recepción de nuestra respuesta, por favor
-						agrega info@giganet-srl.com a tus contactos o revisa tu carpeta de
-						spam.
-					</p> */}
-
 					<AnimatePresence>
 						{message && (
 							<motion.div
@@ -139,7 +133,7 @@ function Contacto() {
 						)}
 					</AnimatePresence>
 
-					<button type="submit" className="button">
+					<button type="submit" className="contacto-button">
 						{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
 					</button>
 
