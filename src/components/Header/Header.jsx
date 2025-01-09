@@ -47,6 +47,12 @@ function Header() {
 		e.preventDefault();
 		setActiveSection(sectionId);
 
+		// Manejar rutas especiales
+		if (sectionId === 'login') {
+			navigate('/login');
+			return;
+		}
+
 		if (sectionId === 'contact') {
 			navigate('/contact');
 			return;

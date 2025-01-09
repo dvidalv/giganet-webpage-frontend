@@ -9,9 +9,10 @@ if (window.location.hostname === 'localhost') {
 export const menuLinks = [
 	{ to: 'hero', text: 'Inicio', submenu: false },
 	{ to: 'servicios', text: 'Servicios', submenu: false },
-	{ to: 'nosotros', text: 'Sobre Nosotros', submenu: false },
+	{ to: 'nosotros', text: 'Nosotros', submenu: false },
 	{ to: 'clientes', text: 'Clientes', submenu: false },
 	{ to: 'contact', text: 'Contacto', submenu: false },
+	{ to: 'login', text: 'Login', submenu: false },
 ];
 
 // export const FILEMAKER_URL = 'https://www.server-lpcr.com.doo';

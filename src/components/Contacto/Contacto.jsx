@@ -1,14 +1,10 @@
-import './Contacto.css';
-import Header from '../Header/Header';
-
 import { Form, useActionData, useNavigation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { getLocation } from '../../api/api';
 import { MdLocationOn } from 'react-icons/md';
-
-
-import 'animate.css';
 import { motion, AnimatePresence } from 'motion/react';
+import 'animate.css';
+import './Contacto.css';
 
 function Contacto() {
 	const formRef = useRef(null);
@@ -16,7 +12,6 @@ function Contacto() {
 	const [locationStatus, setLocationStatus] = useState('');
 	const [error, setError] = useState(false);
 	const [message, setMessage] = useState('');
-
 
 	useEffect(() => {
 		getLocation(setLocationStatus);
@@ -51,7 +46,6 @@ function Contacto() {
 	const navigation = useNavigation();
 	const isSubmitting = navigation.state === 'submitting';
 
-	// Función para determinar el estilo del mensaje basado en el tipo
 	const getMessageStyle = (isError) => ({
 		background: isError
 			? 'linear-gradient(135deg, #ff4444 0%, #cc0000 100%)'
@@ -69,93 +63,93 @@ function Contacto() {
 	});
 
 	return (
-		<>
-			<Header />
-			<div className="form_container">
-				<div className="contact" id="contact">
-					<h1>Contacto</h1>
-					<Form
-						ref={formRef}
-						method="post"
-						className="contact-form"
-						action="/contact"
-					>
-						<input type="hidden" name="locationStatus" value={locationStatus} />
-						<div className="form-group">
-							<label htmlFor="nombre">Nombre</label>
-							<input
-								type="text"
-								id="nombre"
-								name="nombre"
-								placeholder="Ingrese su nombre"
-								required
-							/>
-						</div>
+		<div className="form_container">
+			<div className="contact">
+				<h1>Contacto</h1>
+				<Form ref={formRef} method="post" className="contact-form">
+					<div className="form-group">
+						<label htmlFor="nombre">Nombre</label>
+						<input
+							type="text"
+							id="nombre"
+							name="nombre"
+							required
+							placeholder="Tu nombre"
+						/>
+					</div>
 
-						<div className="form-group">
-							<label htmlFor="telefono">Teléfono</label>
-							<input
-								type="tel"
-								id="telefono"
-								name="telefono"
-								placeholder="Ingrese su teléfono"
-								required
-							/>
-						</div>
+					<div className="form-group">
+						<label htmlFor="telefono">Teléfono</label>
+						<input
+							type="tel"
+							id="telefono"
+							name="telefono"
+							required
+							placeholder="Tu teléfono"
+						/>
+					</div>
 
-						<div className="form-group">
-							<label htmlFor="email">Email</label>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								placeholder="Ingrese su email"
-								required
-							/>
-						</div>
+					<div className="form-group">
+						<label htmlFor="email">Email</label>
+						<input
+							type="email"
+							id="email"
+							name="email"
+							required
+							placeholder="Tu email"
+						/>
+					</div>
 
-						<div className="form-group">
-							<label htmlFor="mensaje">Mensaje</label>
-							<textarea
-								id="mensaje"
-								name="mensaje"
-								placeholder="Escriba su mensaje"
-								rows="4"
-								required
-							></textarea>
-						</div>
+					<div className="form-group">
+						<label htmlFor="mensaje">Mensaje</label>
+						<textarea
+							id="mensaje"
+							name="mensaje"
+							required
+							placeholder="Tu mensaje"
+							rows="5"
+						></textarea>
+					</div>
 
-						<AnimatePresence>
-							{message && (
-								<motion.div
-									initial={{ opacity: 0, y: -20 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: 20 }}
-									transition={{ duration: 0.5, ease: 'easeOut' }}
-									style={getMessageStyle(error)}
+					<input type="hidden" name="locationStatus" value={locationStatus} />
+
+					{/* <p className="email-notice">
+						Nota: Para asegurar la recepción de nuestra respuesta, por favor
+						agrega info@giganet-srl.com a tus contactos o revisa tu carpeta de
+						spam.
+					</p> */}
+
+					<AnimatePresence>
+						{message && (
+							<motion.div
+								initial={{ opacity: 0, y: -20 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: 20 }}
+								transition={{ duration: 0.5, ease: 'easeOut' }}
+								style={getMessageStyle(error)}
+							>
+								<motion.span
+									initial={{ scale: 0.8 }}
+									animate={{ scale: 1 }}
+									transition={{ delay: 0.2 }}
 								>
-									<motion.span
-										initial={{ scale: 0.8 }}
-										animate={{ scale: 1 }}
-										transition={{ delay: 0.2 }}
-									>
-										{error ? '❌' : '✓'} {message}
-									</motion.span>
-								</motion.div>
-							)}
-						</AnimatePresence>
+									{error ? '❌' : '✓'} {message}
+								</motion.span>
+							</motion.div>
+						)}
+					</AnimatePresence>
 
-						<button type="submit" className={`button`}>
-							{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
-						</button>
-						<p style={{ fontSize: '12px', color: 'gray', textAlign: 'center', display: 'flex', alignItems: 'center', gap: '5px', justifyContent: 'center' }}>
-							<MdLocationOn style={{ fontSize: '16px' }} />
-							{locationStatus}
-						</p>
-					</Form>
-				</div>
+					<button type="submit" className="button">
+						{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+					</button>
+
+					<p className="location-status">
+						<MdLocationOn className="location-icon" />
+						{locationStatus || 'Obteniendo ubicación...'}
+					</p>
+				</Form>
 			</div>
-		</>
+		</div>
 	);
 }
 

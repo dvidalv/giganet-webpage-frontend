@@ -8,11 +8,17 @@ export async function sendContactFormData(data) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				// Agregar headers adicionales para autenticación si es necesario
 			},
-			body: JSON.stringify(data),
+			body: JSON.stringify({
+				...data,
+				// Agregar metadatos adicionales
+				source: window.location.hostname, // Nombre del dominio
+				timestamp: new Date().toISOString(), // Fecha y hora actual
+				userAgent: navigator.userAgent, // Información del navegador
+			}),
 		});
 
-		// Verificar si la respuesta es exitosa
 		if (!response.ok) {
 			return {
 				success: false,

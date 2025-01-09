@@ -4,8 +4,9 @@ import Footer from '../Footer/Footer';
 import SideMenu from '../SideMenu/SideMenu';
 import { MobileContext } from '../../store/mobileContext';
 import { useContext } from 'react';
-	
+
 function Root() {
+	console.log('Root component rendered');
 	const { menuState, toggleSideMenu } = useContext(MobileContext);
 
 	return (
@@ -15,7 +16,7 @@ function Root() {
 			<Footer />
 			<SideMenu isOpen={menuState.isSideMenuOpen} onClose={toggleSideMenu} />
 		</>
-	)
+	);
 }
 
-export default Root
+export default Root;

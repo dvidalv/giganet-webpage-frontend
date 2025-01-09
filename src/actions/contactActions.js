@@ -1,5 +1,6 @@
 import { sendContactFormData } from '../api/api';
 export async function contactAction({ request }) {
+	console.log('Contact action triggered');
 	const formData = await request.formData();
 	const data = {
 		nombre: formData.get('nombre'),
@@ -9,9 +10,7 @@ export async function contactAction({ request }) {
 		locationStatus: formData.get('locationStatus'),
 	};
 
-
 	const response = await sendContactFormData(data);
-
 
 	return response;
 }
