@@ -25,18 +25,26 @@ function Header() {
 			const sections = menuLinks.map((link) =>
 				document.getElementById(link.to)
 			);
-			const scrollPosition = window.scrollY + window.innerHeight / 3;
+			const viewportMiddle = window.scrollY + window.innerHeight / 2;
+
+			let closestSection = null;
+			let closestDistance = Infinity;
 
 			sections.forEach((section) => {
 				if (!section) return;
 
-				const sectionTop = section.offsetTop;
-				const sectionBottom = sectionTop + section.offsetHeight;
+				const sectionMiddle = section.offsetTop + section.offsetHeight / 2;
+				const distance = Math.abs(viewportMiddle - sectionMiddle);
 
-				if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-					setActiveSection(section.id);
+				if (distance < closestDistance) {
+					closestDistance = distance;
+					closestSection = section;
 				}
 			});
+
+			if (closestSection) {
+				setActiveSection(closestSection.id);
+			}
 		};
 
 		window.addEventListener('scroll', handleScroll);
