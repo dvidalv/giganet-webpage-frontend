@@ -58,12 +58,14 @@ function Header() {
 		// Manejar rutas especiales
 		if (sectionId === 'login') {
 			navigate('/login');
+			toggleSideMenu(); // Cerrar el menú móvil después de navegar
 			return;
 		}
 
 		if (sectionId === 'contact') {
 			navigate('/contact');
-			window.scrollTo(0, 0); // Añadir scroll al top
+			window.scrollTo(0, 0);
+			toggleSideMenu(); // Cerrar el menú móvil después de navegar
 			return;
 		}
 

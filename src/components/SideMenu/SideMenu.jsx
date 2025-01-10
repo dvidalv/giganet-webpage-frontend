@@ -11,26 +11,29 @@ function SideMenu({ isOpen, onClose }) {
 		e.preventDefault();
 
 		if (sectionId === 'contact') {
-			navigate('/contact');
+			console.log('Attempting contact navigation');
+			navigate('/contact', { replace: true });
+			onClose(false);
 			return;
 		}
 
-		if (location.pathname !== '/') {
-			navigate('/');
-			setTimeout(() => {
-				const element = document.getElementById(sectionId);
-				if (element) {
-					element.scrollIntoView({ behavior: 'smooth' });
-				}
-			}, 100);
+		if (sectionId === 'login') {
+			console.log('Attempting login navigation');
+			navigate('/login', { replace: true });
+			onClose(false);
 			return;
 		}
 
 		const element = document.getElementById(sectionId);
-		if (element) {
+		if (location.pathname !== '/') {
+			navigate('/');
+			setTimeout(() => {
+				if (element) {
+					element.scrollIntoView({ behavior: 'smooth' });
+				}
+			}, 100);
+		} else if (element) {
 			element.scrollIntoView({ behavior: 'smooth' });
-		} else {
-			console.warn(`Section with id "${sectionId}" not found`);
 		}
 	};
 
