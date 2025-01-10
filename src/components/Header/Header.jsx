@@ -58,14 +58,20 @@ function Header() {
 		// Manejar rutas especiales
 		if (sectionId === 'login') {
 			navigate('/login');
-			toggleSideMenu(); // Cerrar el menú móvil después de navegar
+			// Solo cerrar el menú si estamos en móvil
+			if (window.innerWidth <= 768) {
+				toggleSideMenu();
+			}
 			return;
 		}
 
 		if (sectionId === 'contact') {
 			navigate('/contact');
 			window.scrollTo(0, 0);
-			toggleSideMenu(); // Cerrar el menú móvil después de navegar
+			// Solo cerrar el menú si estamos en móvil
+			if (window.innerWidth <= 768) {
+				toggleSideMenu();
+			}
 			return;
 		}
 
