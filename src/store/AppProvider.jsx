@@ -1,7 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-
-const AppContext = createContext();
+import { AppContext } from './appContext';
 
 export function AppProvider({ children }) {
 	const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -17,11 +16,3 @@ export function AppProvider({ children }) {
 AppProvider.propTypes = {
 	children: PropTypes.node.isRequired,
 };
-
-export function useAppContext() {
-	const context = useContext(AppContext);
-	if (!context) {
-		throw new Error('useAppContext must be used within an AppProvider');
-	}
-	return context;
-}

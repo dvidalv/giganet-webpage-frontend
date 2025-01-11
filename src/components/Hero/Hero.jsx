@@ -1,10 +1,9 @@
 import imagen from '../../assets/images/hero.png';
 import './Hero.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Hero() {
 	const navigate = useNavigate();
-	const location = useLocation();
 
 	const handleContactClick = (e) => {
 		e.preventDefault();

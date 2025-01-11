@@ -2,50 +2,114 @@
 	position: fixed;
 	top: var(--header-height);
 	right: 0;
-	width: 50%;
-	max-width: 250px;
+	width: 70%;
+	max-width: 300px;
 	height: calc(100vh - var(--header-height));
-	background-color: rgb(0, 0, 0);
-	transition: all 0.8s ease-in-out;
+	background-color: rgba(0, 0, 0, 0.95);
+	transition: all 0.3s ease-in-out;
 	transform: translateX(100%);
 	z-index: 1000;
-	
-	&.open {
-		transform: translateX(0);
-	}
+	backdrop-filter: blur(5px);
+}
+
+.side-menu.open {
+	transform: translateX(0);
+	box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.side-menu-content {
+	height: 100%;
+	overflow-y: auto;
 }
 
 .side-menu-list {
 	list-style: none;
-	outline: none;
-	padding: 30px 20px;
-	/* background-color: red; */
+	padding: 2rem 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
 }
 
-.side-menu-item {
-	padding-left: 10px;
-	margin-bottom: 30px;
+.side-menu-list li {
+	position: relative;
+}
+
+.side-menu-list a {
 	color: var(--color-secondary);
-	font-size: 1.2rem;
-	font-weight: 200;
+	font-size: 1.1rem;
 	text-decoration: none;
 	transition: all 0.3s ease;
-	position: relative;
-	/* text-align: center; */
+	display: block;
+	padding: 0.5rem 1rem;
+	border-left: 3px solid transparent;
+}
 
-	&:hover {
-		color: var(--color-primary);
-		cursor: pointer;
-		
-		&::before {
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 0;
-			height: 100%;
-			width: 3px;
-			background-color: var(--color-primary);
-		}
+.side-menu-list a:hover {
+	color: var(--color-primary);
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Solo aplicar el borde cuando el enlace está activo */
+.side-menu-list a.active {
+	color: var(--color-primary);
+	border-left-color: var(--color-primary);
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Estilo por defecto para los enlaces no activos */
+.side-menu-list a:not(.active) {
+	color: var(--color-secondary);
+	border-left-color: transparent;
+}
+
+/* Animación para los items del menú */
+.side-menu.open .side-menu-list li {
+	animation: slideIn 0.3s ease-out forwards;
+	opacity: 0;
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateX(20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+/* Aplicar delay a cada item para crear efecto cascada */
+.side-menu-list li:nth-child(1) {
+	animation-delay: 0.1s;
+}
+.side-menu-list li:nth-child(2) {
+	animation-delay: 0.2s;
+}
+.side-menu-list li:nth-child(3) {
+	animation-delay: 0.3s;
+}
+.side-menu-list li:nth-child(4) {
+	animation-delay: 0.4s;
+}
+.side-menu-list li:nth-child(5) {
+	animation-delay: 0.5s;
+}
+.side-menu-list li:nth-child(6) {
+	animation-delay: 0.6s;
+}
+
+/* Estilos para dispositivos más pequeños */
+@media (max-width: 480px) {
+	.side-menu {
+		width: 85%;
 	}
 
+	.side-menu-list {
+		padding: 1.5rem 1rem;
+	}
+
+	.side-menu-list a {
+		font-size: 1rem;
+	}
 }

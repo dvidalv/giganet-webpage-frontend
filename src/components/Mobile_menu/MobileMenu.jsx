@@ -1,17 +1,15 @@
 import './Mobile_menu.css';
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { MobileContext } from '../../store/mobileContext';
 
-function MobileMenu({ isOpen, setIsOpen }) {
-
-
-	const toggleMenu = () => {
-		setIsOpen(!isOpen);
-	}
+function MobileMenu() {
+	const { menuState, toggleSideMenu } = useContext(MobileContext);
+	const isOpen = menuState.isSideMenuOpen;
 
 	return (
 		<div
 			className={`menu_mobile_container ${isOpen ? 'open' : ''}`}
-			onClick={toggleMenu}
+			onClick={toggleSideMenu}
 		>
 			<div className="menu_mobile_line menu_mobile_line_1"></div>
 			<div className="menu_mobile_line menu_mobile_line_2"></div>
@@ -19,10 +17,5 @@ function MobileMenu({ isOpen, setIsOpen }) {
 		</div>
 	);
 }
-
-MobileMenu.propTypes = {
-	isOpen: PropTypes.bool.isRequired,
-	setIsOpen: PropTypes.func.isRequired,
-};
 
 export default MobileMenu;

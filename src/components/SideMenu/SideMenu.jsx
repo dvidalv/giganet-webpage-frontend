@@ -1,73 +1,147 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { menuLinks } from '../../utils/constants';
-
-import PropTypes from 'prop-types';
-
+import { useContext, useState } from 'react';
+import { MobileContext } from '../../store/mobileContext';
 import './SideMenu.css';
-function SideMenu({ isOpen, onClose }) {
+
+function SideMenu() {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const handleScroll = (e, sectionId) => {
-		e.preventDefault();
+	const { menuState, toggleSideMenu } = useContext(MobileContext);
+	const isOpen = menuState.isSideMenuOpen;
+	const [activeSection, setActiveSection] = useState('hero');
 
-		if (sectionId === 'contact') {
-			console.log('Attempting contact navigation');
-			navigate('/contact', { replace: true });
-			onClose(false);
+	const handleScrollTo = (elementId) => {
+		if (elementId === 'contact') {
+			navigate('/contact');
+			setActiveSection('contact');
+			toggleSideMenu();
 			return;
 		}
 
-		if (sectionId === 'login') {
-			console.log('Attempting login navigation');
-			navigate('/login', { replace: true });
-			onClose(false);
+		if (elementId === 'login') {
+			navigate('/login');
+			setActiveSection('login');
+			toggleSideMenu();
 			return;
 		}
 
-		const element = document.getElementById(sectionId);
+		setActiveSection(elementId);
+
+		// Si no estamos en la página principal, primero navegamos a ella
 		if (location.pathname !== '/') {
 			navigate('/');
 			setTimeout(() => {
+				const element = document.getElementById(elementId);
 				if (element) {
-					element.scrollIntoView({ behavior: 'smooth' });
+					const headerHeight = 100;
+					const elementPosition = element.getBoundingClientRect().top;
+					const offsetPosition =
+						elementPosition + window.scrollY - headerHeight;
+
+					window.scrollTo({
+						top: offsetPosition,
+						behavior: 'smooth',
+					});
 				}
 			}, 100);
-		} else if (element) {
-			element.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			const element = document.getElementById(elementId);
+			if (element) {
+				const headerHeight = 100;
+				const elementPosition = element.getBoundingClientRect().top;
+				const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+				window.scrollTo({
+					top: offsetPosition,
+					behavior: 'smooth',
+				});
+			}
 		}
+		toggleSideMenu();
 	};
 
 	return (
 		<div className={`side-menu ${isOpen ? 'open' : ''}`}>
 			<div className="side-menu-content">
 				<nav>
-					<ul
-						className="side-menu-list"
-						onMouseLeave={() => {
-							if (isOpen) {
-								onClose(false);
-							}
-						}}
-					>
-						{menuLinks.map((link) => (
-							<li
-								key={link.to}
-								className="side-menu-item"
-								onClick={(e) => handleScroll(e, link.to)}
+					<ul className="side-menu-list">
+						<li>
+							<a
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScrollTo('hero');
+								}}
+								className={activeSection === 'hero' ? 'active' : ''}
 							>
-								{link.text}
-							</li>
-						))}
+								Inicio
+							</a>
+						</li>
+						<li>
+							<a
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScrollTo('servicios');
+								}}
+								className={activeSection === 'servicios' ? 'active' : ''}
+							>
+								Servicios
+							</a>
+						</li>
+						<li>
+							<a
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScrollTo('nosotros');
+								}}
+								className={activeSection === 'nosotros' ? 'active' : ''}
+							>
+								Nosotros
+							</a>
+						</li>
+						<li>
+							<a
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScrollTo('clientes');
+								}}
+								className={activeSection === 'clientes' ? 'active' : ''}
+							>
+								Clientes
+							</a>
+						</li>
+						<li>
+							<a
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScrollTo('contact');
+								}}
+								className={activeSection === 'contact' ? 'active' : ''}
+							>
+								Contacto
+							</a>
+						</li>
+						<li>
+							<a
+								href="#"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScrollTo('login');
+								}}
+								className={activeSection === 'login' ? 'active' : ''}
+							>
+								Login
+							</a>
+						</li>
 					</ul>
 				</nav>
 			</div>
 		</div>
 	);
 }
-
-SideMenu.propTypes = {
-	isOpen: PropTypes.bool.isRequired,
-	onClose: PropTypes.func.isRequired,
-};
 
 export default SideMenu;
