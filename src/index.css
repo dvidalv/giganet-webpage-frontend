@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: var(--header-height);
+}
 
 body {
 	font-family: 'Roboto Condensed', sans-serif;
@@ -72,9 +76,4 @@ h2 {
 	font-weight: 700;
 	padding: 40px 0;
 	text-align: center;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: var(--header-height);
 }

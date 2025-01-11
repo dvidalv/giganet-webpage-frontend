@@ -1,142 +1,125 @@
-import { useContext, useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import MobileMenu from '../Mobile_menu/MobileMenu';
-import MenuLink from '../DropDown/MenuLink';
-import DropDown from '../DropDown/DropDown';
-
-import { MobileContext } from '../../store/mobileContext';
-import { menuLinks } from '../../utils/constants';
 
 import './Header.css';
 import logo from '../../assets/images/giganet_logo.png';
 
 function Header() {
-	const navigate = useNavigate();
-	const { menuState, toggleSideMenu } = useContext(MobileContext);
-	const [activeSection, setActiveSection] = useState('hero');
 	const location = useLocation();
+	const navigate = useNavigate();
 
-	// Add scroll event listener to track active section
 	useEffect(() => {
-		const handleScroll = () => {
-			if (location.pathname === '/contact') return;
-
-			const sections = menuLinks.map((link) =>
-				document.getElementById(link.to)
-			);
-			const viewportMiddle = window.scrollY + window.innerHeight / 2;
-
-			let closestSection = null;
-			let closestDistance = Infinity;
-
-			sections.forEach((section) => {
-				if (!section) return;
-
-				const sectionMiddle = section.offsetTop + section.offsetHeight / 2;
-				const distance = Math.abs(viewportMiddle - sectionMiddle);
-
-				if (distance < closestDistance) {
-					closestDistance = distance;
-					closestSection = section;
-				}
-			});
-
-			if (closestSection) {
-				setActiveSection(closestSection.id);
-			}
-		};
-
-		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
+		if (location.pathname === '/contact' || location.pathname === '/login') {
+			window.scrollTo(0, 0);
+		}
 	}, [location.pathname]);
 
-	const handleScroll = (e, sectionId) => {
-		e.preventDefault();
-		setActiveSection(sectionId);
-
-		// Manejar rutas especiales
-		if (sectionId === 'login') {
-			navigate('/login');
-			// Solo cerrar el menú si estamos en móvil
-			if (window.innerWidth <= 768) {
-				toggleSideMenu();
-			}
-			return;
-		}
-
-		if (sectionId === 'contact') {
-			navigate('/contact');
-			window.scrollTo(0, 0);
-			// Solo cerrar el menú si estamos en móvil
-			if (window.innerWidth <= 768) {
-				toggleSideMenu();
-			}
-			return;
-		}
-
+	const handleScroll = (elementId) => {
+		// Si no estamos en la página principal, primero navegamos a ella
 		if (location.pathname !== '/') {
 			navigate('/');
+			// Esperamos un momento para que los componentes se monten
 			setTimeout(() => {
-				const element = document.getElementById(sectionId);
+				const element = document.getElementById(elementId);
 				if (element) {
-					element.scrollIntoView({ behavior: 'smooth' });
+					const headerHeight = 100;
+					const elementPosition = element.getBoundingClientRect().top;
+					const offsetPosition =
+						elementPosition + window.scrollY - headerHeight;
+
+					window.scrollTo({
+						top: offsetPosition,
+						behavior: 'smooth',
+					});
 				}
 			}, 100);
-			return;
-		}
-
-		const element = document.getElementById(sectionId);
-		if (element) {
-			element.scrollIntoView({ behavior: 'smooth' });
 		} else {
-			console.warn(`Section with id "${sectionId}" not found`);
-		}
-	};
+			// Si ya estamos en la página principal, solo hacemos scroll
+			const element = document.getElementById(elementId);
+			if (element) {
+				const headerHeight = 100;
+				const elementPosition = element.getBoundingClientRect().top;
+				const offsetPosition = elementPosition + window.scrollY - headerHeight;
 
-	const isActive = (path) => {
-		if (path === 'contact') {
-			return location.pathname === '/contact';
+				window.scrollTo({
+					top: offsetPosition,
+					behavior: 'smooth',
+				});
+			}
 		}
-		if (location.pathname === '/') {
-			return activeSection === path;
-		}
-		return false;
 	};
 
 	return (
 		<div className="header">
 			<div className="contenido_header contenedor">
-				<div className="imagen_header" onClick={(e) => handleScroll(e, 'hero')}>
+				<div
+					className="imagen_header"
+					onClick={() => {
+						navigate('/');
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					}}
+				>
 					<img src={logo} alt="logo" className="w-[170px] mb-4" />
 				</div>
 
 				<div className="nav_header">
 					<ul>
-						{menuLinks.map((link) => (
-							<MenuLink
-								key={link.to}
-								{...link}
-								isActive={isActive(link.to)}
-								onClick={(e) => handleScroll(e, link.to)}
+						<li>
+							<NavLink
+								to="/"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScroll('hero');
+								}}
 							>
-								{link.submenu &&
-									link.submenuItems.map((subItem) => (
-										<DropDown
-											key={subItem.to}
-											to={subItem.to}
-											text={subItem.text}
-										/>
-									))}
-							</MenuLink>
-						))}
+								Inicio
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								to="/"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScroll('servicios');
+								}}
+							>
+								Servicios
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								to="/"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScroll('nosotros');
+								}}
+							>
+								Nosotros
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								to="/"
+								onClick={(e) => {
+									e.preventDefault();
+									handleScroll('clientes');
+								}}
+							>
+								Clientes
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to="/contact">Contacto</NavLink>
+						</li>
+						<li>
+							<NavLink to="/login" id="login">
+								Login
+							</NavLink>
+						</li>
 					</ul>
 				</div>
-
-				<MobileMenu
-					isOpen={menuState.isSideMenuOpen}
-					setIsOpen={toggleSideMenu}
-				/>
 			</div>
 		</div>
 	);
