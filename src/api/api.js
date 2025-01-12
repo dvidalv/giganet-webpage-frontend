@@ -7,6 +7,7 @@ export async function sendLoginFormData(data, endpoint) {
 		headers: {
 			'Content-Type': 'application/json',
 		},
+		credentials: 'include',
 		body: JSON.stringify(data),
 	});
 	return response;
