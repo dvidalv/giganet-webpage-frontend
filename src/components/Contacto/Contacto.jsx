@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { getLocation } from '../../api/api';
 import { MdLocationOn } from 'react-icons/md';
 import { motion, AnimatePresence } from 'motion/react';
-import 'animate.css';
+import 'animate.css/animate.css';
 import './Contacto.css';
 
 function Contacto() {
