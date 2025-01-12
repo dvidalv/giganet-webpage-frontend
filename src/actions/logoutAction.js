@@ -1,7 +1,7 @@
 import { redirect } from 'react-router-dom';
 
-export const logoutAction = () => {
+export function logoutAction() {
 	localStorage.removeItem('token');
-	localStorage.removeItem('expiration');
+	localStorage.removeItem('expirationDate');
 	return redirect('/');
-};
+}

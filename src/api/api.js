@@ -1,5 +1,17 @@
 import SERVER_URL from '../utils/constants';
 
+export async function sendLoginFormData(data, endpoint) {
+	const url = `${SERVER_URL}/api/users/${endpoint}`;
+	const response = await fetch(url, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	});
+	return response;
+}
+
 export async function sendContactFormData(data) {
 	const url = `${SERVER_URL}/api/form-contact`;
 

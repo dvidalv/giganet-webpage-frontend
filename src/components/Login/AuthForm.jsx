@@ -120,19 +120,6 @@ function AuthForm() {
 						/>
 					</div>
 
-					{!isLogin && (
-						<div className="form-group">
-							<label htmlFor="confirmPassword">Confirmar Contraseña</label>
-							<input
-								type="password"
-								id="confirmPassword"
-								name="confirmPassword"
-								required
-								placeholder="Confirma tu contraseña"
-							/>
-						</div>
-					)}
-
 					<AnimatePresence>
 						{message && (
 							<motion.div

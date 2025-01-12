@@ -1,17 +1,26 @@
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import {
+	Form,
+	NavLink,
+	useLocation,
+	useNavigate,
+	useRouteLoaderData,
+} from 'react-router-dom';
 import { useEffect } from 'react';
 
 import MobileMenu from '../Mobile_menu/MobileMenu';
 
 import './Header.css';
 import logo from '../../assets/images/giganet_logo.png';
+import { getAuthToken } from '../../utils/auth';
 
 function Header() {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const token = useRouteLoaderData('root') || null;
+
 
 	useEffect(() => {
-		if (location.pathname === '/contact' || location.pathname === '/login') {
+		if (location.pathname === '/contact' || location.pathname === '/auth') {
 			window.scrollTo(0, 0);
 		}
 	}, [location.pathname]);
@@ -113,14 +122,23 @@ function Header() {
 						<li>
 							<NavLink to="/contact">Contacto</NavLink>
 						</li>
-						<li>
-							<NavLink to="/login" id="login">
-								Login
-							</NavLink>
-						</li>
+						{!token && (
+							<li>
+								<NavLink to="/auth?mode=login" id="auth">
+									Login
+								</NavLink>
+							</li>
+						)}
+						{token && (
+							<li>
+								<Form method="post" action="/logout">
+									<button>Logout</button>
+								</Form>
+							</li>
+						)}
 					</ul>
 				</div>
-					<MobileMenu />
+				<MobileMenu />
 			</div>
 		</div>
 	);
