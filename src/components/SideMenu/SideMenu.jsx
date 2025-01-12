@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useRouteLoaderData, Form } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { MobileContext } from '../../store/mobileContext';
 import './SideMenu.css';
@@ -9,7 +9,7 @@ function SideMenu() {
 	const { menuState, toggleSideMenu } = useContext(MobileContext);
 	const isOpen = menuState.isSideMenuOpen;
 	const [activeSection, setActiveSection] = useState('hero');
-
+	const token = useRouteLoaderData('root') || null;
 	const handleScrollTo = (elementId) => {
 		if (elementId === 'contact') {
 			navigate('/contact');
@@ -19,7 +19,7 @@ function SideMenu() {
 		}
 
 		if (elementId === 'login') {
-			navigate('/login');
+			navigate('/auth?mode=login');
 			setActiveSection('login');
 			toggleSideMenu();
 			return;
@@ -125,18 +125,27 @@ function SideMenu() {
 								Contacto
 							</a>
 						</li>
-						<li>
-							<a
-								href="#"
-								onClick={(e) => {
-									e.preventDefault();
-									handleScrollTo('login');
-								}}
-								className={activeSection === 'login' ? 'active' : ''}
-							>
-								Login
-							</a>
-						</li>
+						{!token && (
+							<li>
+								<a
+									href="#"
+									onClick={(e) => {
+										e.preventDefault();
+										handleScrollTo('login');
+									}}
+									className={activeSection === 'login' ? 'active' : ''}
+								>
+									Login
+								</a>
+							</li>
+						)}
+						{token && (
+							<li>
+								<Form method="post" action="/logout">
+									<button type="submit">Logout</button>
+								</Form>
+							</li>
+						)}
 					</ul>
 				</nav>
 			</div>
