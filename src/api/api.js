@@ -2,15 +2,37 @@ import SERVER_URL from '../utils/constants';
 
 export async function sendLoginFormData(data, endpoint) {
 	const url = `${SERVER_URL}/api/users/${endpoint}`;
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		credentials: 'include',
-		body: JSON.stringify(data),
-	});
-	return response;
+	console.log('Enviando petición a:', url);
+	console.log('Origen actual:', window.location.origin);
+
+	try {
+		const response = await fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Origin: window.location.origin,
+			},
+			credentials: 'include',
+			mode: 'cors',
+			body: JSON.stringify(data),
+		});
+
+		// Loguear las cabeceras de la respuesta
+		console.log('Status:', response.status);
+		console.log('Headers:', {
+			'access-control-allow-origin': response.headers.get(
+				'access-control-allow-origin'
+			),
+			'access-control-allow-credentials': response.headers.get(
+				'access-control-allow-credentials'
+			),
+		});
+
+		return response;
+	} catch (error) {
+		console.error('Error detallado:', error);
+		throw error;
+	}
 }
 
 export async function sendContactFormData(data) {
