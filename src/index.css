@@ -77,3 +77,8 @@ h2 {
 	padding: 40px 0;
 	text-align: center;
 }
+
+.input {
+	border: none;
+	outline: none;
+}

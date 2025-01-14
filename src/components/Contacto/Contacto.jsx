@@ -68,47 +68,51 @@ function Contacto() {
 				<h1>Contacto</h1>
 				<Form ref={formRef} method="post" className="contacto-form">
 					<div className="form-group">
-						<label htmlFor="nombre">Nombre</label>
 						<input
 							type="text"
 							id="nombre"
 							name="nombre"
 							required
 							placeholder="Tu nombre"
+							className='input'
 						/>
+						<label htmlFor="nombre" className='label'>Nombre</label>
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="telefono">Teléfono</label>
 						<input
 							type="tel"
 							id="telefono"
 							name="telefono"
 							required
 							placeholder="Tu teléfono"
+							className='input'
 						/>
+						<label htmlFor="telefono" className='label'>Teléfono</label>
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="email">Email</label>
 						<input
 							type="email"
 							id="email"
 							name="email"
 							required
 							placeholder="Tu email"
+							className='input'
 						/>
+						<label htmlFor="email" className='label'>Email</label>
 					</div>
 
 					<div className="form-group">
-						<label htmlFor="mensaje">Mensaje</label>
 						<textarea
 							id="mensaje"
 							name="mensaje"
 							required
 							placeholder="Tu mensaje"
 							rows="5"
+							className='input'
 						></textarea>
+						<label htmlFor="mensaje" className='label'>Mensaje</label>
 					</div>
 
 					<input type="hidden" name="locationStatus" value={locationStatus} />
