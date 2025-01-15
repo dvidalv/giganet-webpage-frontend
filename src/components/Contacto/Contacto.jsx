@@ -75,6 +75,8 @@ function Contacto() {
 							required
 							placeholder="Tu nombre"
 							className='input'
+							minLength="3"
+							maxLength="20"
 						/>
 						<label htmlFor="nombre" className='label'>Nombre</label>
 					</div>
@@ -85,8 +87,10 @@ function Contacto() {
 							id="telefono"
 							name="telefono"
 							required
-							placeholder="Tu teléfono"
+							placeholder="Tu teléfono (ej: 809-000-0000)"
 							className='input'
+							pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+			
 						/>
 						<label htmlFor="telefono" className='label'>Teléfono</label>
 					</div>
@@ -97,8 +101,9 @@ function Contacto() {
 							id="email"
 							name="email"
 							required
-							placeholder="Tu email"
+							placeholder="Tu email (ej: ejemplo@gmail.com)"
 							className='input'
+							pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
 						/>
 						<label htmlFor="email" className='label'>Email</label>
 					</div>
